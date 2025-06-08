@@ -1,0 +1,104 @@
+A MTU para aceitando a palavra se atingir o estado final (único) ou se atingir um estado (não-final) a partir do qual não há transição possível de ser disparada.
+
+Se atingir um estado final, escreve #A à direita da palavra;
+Se atingir um estado não-final sem mais transições, escreve #R à direita da palavra.
+
+Caso a MTU pare rejeitando, significa que a MT de entrada não é uma palavra da linguagem.
+
+Forma da transição de uma MT de entrada:
+
+estado origem; símbolo lido; símbolo escrito; movimento; estado destino.
+Ex:  q1 a1 a11 R q11    #(separador)  q11 a11 a111 L q11
+
+O estado final é qf.
+
+
+A função de transição é separada por $ e em seguida vem a entrada da MT.
+
+Ex geral: q1 a1 a11 R q11 # q11 a11 a111 L qf # q11 a1 a11 R q1 $ a1 a11
+
+resultado final: q1 a1 a11 R q11 # q11 a11 a111 L qf # q11 a1 a11 R q1 $ A11 a111 # A
+
+q1 a1 a11 $ a1 a11
+
+
+A maiúsculo indica que o cabeçote está nessa posição.
+
+Algoritmo:
+
+(Primeiro estado é sempre q1, procurando função de transição correspondente ao estado 1 e a primeira palavra)
+
+Pula tudo até chegar em $. ( !$ ~ $ R ).
+Chega em a, transforma em A.
+Transforma A1 em A2, vai pra esquerda até achar vazio.
+Vai pra direita até achar q1.
+Vai pra direita até achar a.
+Transforma a em B.
+Transforma B1 em B2.
+* Vai pra direita até achar A2.
+Vai pra direita e troca o próximo 1 por 2.
+Se achar a ou vazio: 
+	significa que acabou a palavra, volta pra esquerda desmarcando.
+	Chega até o primeiro 2.
+	Depois tem mais 1?
+		Se sim: Função errada, vamos para a próxima.
+		se não, Função correta. podemos prosseguir com o algoritmo.
+
+Vai pra esquerda atéq1a1a11$a1a11 achar B.
+Vai pra direita até achar 1.
+Troca 1 por 2. Volte para  *
+Caso encontre a, a função está incorreta. Desmarque tudo e comece novamente.
+Ao finalizar A222 e B222, significa que encontramos a função correta para o estado inicial e a palavra inicial.
+Vai para a direita até achar o próximo a, precisamos escrever esse a no lugar do a que vem após $.
+	
+
+(não achou a função correspondente de primeira)
+
+A seguir tem mais 1?  Palavra incorreta, precisamos achar a outra função.
+Transforma de volta A22 para a11.
+Vai para a direita até achar #.
+Procura q.
+Procura 1.
+Tem mais 1 depois? Estado errado, MTU para rejeitando (cria um estado sem mais transições).
+Não tem mais 1? Estado certo, vamos verificar agora a palavra a.
+ 
+
+A seguir tem a? Palavra correta, podemos prosseguir.
+
+
+
+Exemplo de teste: q1a1a11Rq11#q11a11a111Lqf#q11a1a11Rq1$A11a111
+
+q1a111a11Rq11#q1a11a111Lqf1$a11a111
+
+
+
+
+
+
+Palavras testadas:
+1 - q1a111a11Rq11#q1a11a111Lqf1$a11
+
+2 - q1a1a11Rq11#q1a11a111Lqf1$a11
+
+3 - q1a11a11Rq11#q1a111a111Lqf1$a11
+
+
+
+Paramos em:
+
+Cabeça movida para a esquerda ou direita;
+Palavra nova escrita quando tem o número exatos de 1s ou um branco do lado;
+Verificamos somente a transição do estado q1;
+Não passamos de estado;
+Não verificamos a notação DA MT de entrada;
+
+
+
+
+
+
+
+
+
+
