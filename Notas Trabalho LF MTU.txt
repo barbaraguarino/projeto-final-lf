@@ -77,15 +77,15 @@ q1a111a11Rq11#q1a11a111Lqf1$a11a111
 
 
 Palavras testadas:
-1 - q1a111a11Rq11#q1a11a111Lqf1$a11
+1 - q1a111a11Rq11#q1a11a111Lqf$a11
 
-2 - q1a1a11Rq11#q1a11a111Lqf1$a11
+2 - q1a1a11Rq11#q1a11a111Lqf$a11
 
-3 - q1a11a11Rq11#q1a111a111Lqf1$a11
+3 - q1a11a11Rq11#q1a111a111Lqf$a11
 
 
 
-Paramos em:
+08/06/2025 Paramos em: 
 
 Cabeça movida para a esquerda ou direita;
 Palavra nova escrita quando tem o número exatos de 1s ou um branco do lado;
@@ -94,7 +94,12 @@ Não passamos de estado;
 Não verificamos a notação DA MT de entrada;
 
 
+11/06/2025 O QUE FALTA RESOLVER
 
+1- Se o q1 não estiver na ordem
+2- Se tiver uma palavra no lado para escrever
+3- Se a transição não mudar para um estado final (para outras palavras)
+3- Se não for q1 (estamos tratando só quando for q1
 
 
 
