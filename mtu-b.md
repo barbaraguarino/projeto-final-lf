@@ -1,6 +1,4 @@
-# Máquina de Turing (Barbara)
-
-----
+# Construção da Máquina de Turing (Barbara)
 
 ## Guia Informal
 
@@ -14,8 +12,6 @@
 8. Se achar f no lugar de 1 indica que o próximo estado é um estado final
 9. Se a transição for a primeira da fita não precisa remover os F, pois não deve ter F na fita
 
----
-
 ## O que falta?
 
 - **Movimento para a Esquerda (`L`)**: `q54` cobre o movimento para a direita (`R`). Falta o movimento à esquerda (`L`).
@@ -23,13 +19,11 @@
 - **Movimento para a Esquerda no Início da Fita**: Tratar os casos onde o cabeçote deve se mover para o início da palavra
 - **Quando for Escrever o Símbolo ele Diminui de Tamanho**: fazer a solução para quando ele for escrever um símbolo a11 no lugar de a111 ele deslocar para a esquerda o resto da palavra.
 
----
-
 ## Entradas Testas:
 
 - q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a1a11: ok
 
----
+## Máquina de Turing
 
 | ‼️ | Transição | Anotação |
 | --- | --- | --- |
