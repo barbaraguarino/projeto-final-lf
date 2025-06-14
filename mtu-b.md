@@ -1,6 +1,6 @@
 # Construção da Máquina de Turing (Barbara)
 
-## Guia Informal
+## Guia de Identificação para Possíveis Caminhos a Seguir
 
 1. Se não encontrar vazio e sim outro 1
 2. Se não encontrar a e sim mais 1, quer dizer que não condiz com número de 1 em T
