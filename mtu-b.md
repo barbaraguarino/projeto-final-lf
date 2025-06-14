@@ -1,39 +1,25 @@
-# Construção da Máquina de Turing (Barbara)
-
 ## Guia de Identificação para Possíveis Caminhos a Seguir
 
-1. Se não encontrar vazio e sim outro 1
-2. Se não encontrar a e sim mais 1, quer dizer que não condiz com número de 1 em T
-3. Se não tiver mais 1, significa que o símbolo lido não condiz com o símbolo na palavra 
-4. Se não tiver mais 1 no símbolo lido na transição, significa que acabou de ler o símbolo
-5. Se não encontrar um q e sim um F, significa que já verificou essa transição e deve ir para a próxima
-6. Se encontrar um a quer dizer que não tem espaço para escrever a nova palavra. 
-7. Se encontrar L no lugar de R, deve seguir para a esquerda na palavra
-8. Se achar f no lugar de 1 indica que o próximo estado é um estado final
-9. Se a transição for a primeira da fita não precisa remover os F, pois não deve ter F na fita
+1. Se encontrar L no lugar de R, deve seguir para a esquerda na palavra
 
 ## O que falta?
 
-- **Movimento para a Esquerda (`L`)**: `q54` cobre o movimento para a direita (`R`). Falta o movimento à esquerda (`L`).
-- **Tratamento do Símbolo Branco (`b`)**: tratar os casos em que não exista a ou 1 e sim `b`
-- **Movimento para a Esquerda no Início da Fita**: Tratar os casos onde o cabeçote deve se mover para o início da palavra
-- **Quando for Escrever o Símbolo ele Diminui de Tamanho**: fazer a solução para quando ele for escrever um símbolo a11 no lugar de a111 ele deslocar para a esquerda o resto da palavra.
+- [ ]  **Movimento para a Esquerda (`L`)**: `q54` cobre o movimento para a direita (`R`). Falta o movimento à esquerda (`L`).
+- [ ]  **Tratamento do Símbolo Branco (`b`)**: tratar os casos em que não exista a ou 1 e sim `b`
+- [ ]  **Movimento para a Esquerda no Início da Fita**: Tratar os casos onde o cabeçote deve se mover para o início da palavra
+- [ ]  **Quando for Escrever o Símbolo ele Diminui de Tamanho**: fazer a solução para quando ele for escrever um símbolo a11 no lugar de a111 ele deslocar para a esquerda o resto da palavra.
 
-## Entradas Testas:
-
-- q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a1a11: ok
-
-## Máquina de Turing
+## Máquina de Turing Universal
 
 | ‼️ | Transição | Anotação |
 | --- | --- | --- |
-|  | q0    q       q         R      q1 |  |
+|  | q0    q       q         R      q1 | **INICIO DA FITA** |
 |  | q1    1        1        R        q2 |  |
 |  | q2    !$       ~       R        q2 |  |
 |  | q2     $       $       R       q3 |  |
 |  | q3      a       A       L       q4 |  |
 |  | q4      !□      ~       L     q4 |  |
-|  | q4      □      @     L       q5 |  |
+| vi | q4      □      @     L       q5 | **INICIO DA SIMULAÇÃO** |
 |  | q5      □       t        L      q6 |  |
 |  | q6      □       1       R      q7 |  |
 |  | q7     !@      ~      R      q7 |  |
@@ -42,21 +28,21 @@
 |  | q10      1       3      R     q11 |  |
 |  | q11     !@      ~     R    q11 |  |
 |  | q11     @       @    R    q12 |  |
-|  | q12      q       Q     R     q13 |  |
+| ii | q12      q       Q     R     q13 | **INÍCIO DA VERIFICAÇÃO DE UMA REGRA** |
 |  | q12      Q        Q     R    q13 |  |
 |  | q13      F         F       R     q36 |  |
 |  | q13      2       2       R      q13 |  |
 |  | q13      1        2      L     q14 |  |
-|  | q13      a         a      L     q30 | O que leu não condiz com o estado procurado |
+| xvi | q13      a         a      L     q30 | **FALHA NA COMPARAÇÃO DE ESTADO** |
 |  | q14      !T      ~      L      q14 |  |
 |  | q14       T       T       L      q15 |  |
 |  | q15       3       3      L     q15 |  |
 |  | q15       1       3      R      q11 |  |
-| 1 | q15       □        □     R      q16 | Se achar vazio depois dos 3, já leu todo o estado que deve procurar |
+| ix | q15       □        □     R      q16 | **SUCESSO NA COMPARAÇÃO DE ESTADO** |
 |  | q16     !Q       ~       R      q16 |  |
 |  | q16      Q        Q      R       q17 |  |
-|  | q17      2         2       R      q17 |  |
-| 2 | q17      a         A       R       q18 | Significa que o número de 2 bate com o numero de 3 |
+| v | q17      2         2       R      q17 | **INÍCIO DA COMPARAÇÃO DE SÍMBOLO** |
+| x | q17      a         A       R       q18 | **VERIFICA INÍCIO DO SÍMBOLO 'a...’** |
 |  | q17       1        1      L        q38 |  |
 |  | q18      1         2        R       q19 |  |
 |  | q19     !$        ~        R        q19 |  |
@@ -64,14 +50,14 @@
 |  | q20     !A       ~       R        q20 |  |
 |  | q20      A        A       R        q21 |  |
 |  | q21      2        2       R         q21 |  |
-| 3 | q21      1        2       L          q22 | Significa que até o momento condiz com a letra lida na transição |
+| xi | q21      1        2       L          q22 | **PASSO 1 DO PING-PONG (PALAVRA -> REGRA)** |
 |  | q21       a       a      L          q25 |  |
 |  | q22     !$        ~      L          q22 |  |
 |  | q22      $         $      L         q23 |  |
 |  | q23      !2       ~       L         q23 |  |
 |  | q23        2       2       R        q24 |  |
 |  | q24       2        2       R        q24 |  |
-| 4 | q24        1        2      R         q19 | Marcou mais um 1 no símbolo lido e volta a procurar a palavra |
+| xii | q24        1        2      R         q19 | **PASSO 2 DO PING-PONG (REGRA -> PALAVRA)** |
 |  | q24        a        A     R         q39 |  |
 |  | q25         2       1      L         q25 |  |
 |  | q25         A       A     L         q26 |  |
@@ -82,7 +68,7 @@
 |  | q29        2          1         L     q29 |  |
 |  | q29        A         a         L      q30 |  |
 |  | q30       2        1       L      q30 |  |
-|  | q30       Q        F       L       q31 |  |
+| iii | q30       Q        F       L       q31 | **GATILHO DE FALHA DE COMBINAÇÃO** |
 |  | q31      !T         ~      L       q31 |  |
 |  | q31      T         T        L        q32 |  |
 |  | q32      3         1        L      q32 |  |
@@ -94,16 +80,17 @@
 |  | q35       !F       ~        R      q35 |  |
 |  | q35      F        F       R      q36      |  |
 |  | q36     1        1       R      q36 |  |
+|  | q36     a        a       R      q36 |  |
+|  | q36     b        b       R      q36 |  |
+|  | q36     s         s       R       q36 |  |
 |  | q36     q        q       R      q36 |  |
-|  | q36     a        q       R      q36 |  |
 |  | q36     S        S      R      q36 |  |
 |  | q36     R        R       R      q36 |  |
 |  | q36     L        L       R      q36 |  |
 |  | q36     f        f       R      q36 |  |
-|  | q36     b        b       R      q36 |  |
 |  | q36     #        #       R      q37 |  |
-|  | q36      $        $      R        q72 |  |
-| 5 | q37      q        Q       R       q13 | Encontrou uma transição que ainda não verificou |
+| vii | q36      $        $      R        q72 | **REJEIÇÃO - FIM DAS REGRAS** |
+| ii | q37      q        Q       R       q13 | **INÍCIO DA VERIFICAÇÃO DE UMA REGRA** |
 |  | q37      Q       Q        R       q13 |  |
 |  | q37      F         F      R         q36 |  |
 |  | q38      2         1        L        q38 |  |
@@ -114,7 +101,7 @@
 |  | q41       !A      ~       R       q41 |  |
 |  | q41        A       A       R       q42 |  |
 |  | q42       4        4        R       q42 |  |
-| 6 | q42       2        4        L        q43 | 2 substitui por 4, mostra que esta escrevendo sem problema |
+| xiii | q42       2        4        L        q43 | **ESCREVENDO UM DÍGITO DO NOVO SÍMBOLO** |
 |  | q42       a        a        S         q46 |  |
 |  | q42      □         4        S        q43 |  |
 |  | q43      !$       ~        L        q43 |  |
@@ -122,8 +109,9 @@
 |  | q44      !2         $         L      q44 |  |
 |  | q44       2        2        R       q45 |  |
 |  | q45        1       2        R      q40 |  |
-| 7 | q45        R        R       R      q52 | Escreveu o símbolo e encontrou a direção que deve seguir na palavra |
-|  | q45        S         S       R     q70 |  |
+| iv | q45        R        R       R      q52 | **DECISÃO DE MOVIMENTO (R)** |
+| iv | q45        S         S       R     q70 | **DECISÃO DE MOVIMENTO (S)** |
+| iv | q45      L         L       R      q… | **DECISÃO DE MOVIMENTO (L)** |
 |  | q46       !□       ~       R       q46 |  |
 |  | q46       □         □       L        q47 |  |
 |  | q47       1          □      R        q48 |  |
@@ -139,8 +127,8 @@
 |  | q53      !A          ~       R       q53 |  |
 |  | q53       A         a        R        q54 |  |
 |  | q54       4          1        R       q54 |  |
-|  | q54       a           A       L       q56 | Marcou o novo cabeçote, agora deve escrever para qual estado deve ir |
-|  | q54       □          □        L      q56 |  |
+| xvii | q54       a           A       L       q56 | **FINALIZA MOVIMENTO DO CABEÇOTE** |
+| xviii | q54       □          □        L      q56 | **TRATA MOVIMENTO (DIREITA) PARA CÉLULA VAZIA** |
 |  | q56        !$        ~       L        q56 |  |
 |  | q56       $         $       L        q57 |  |
 |  | q57       !2        ~      L       q57 |  |
@@ -148,12 +136,12 @@
 |  | q58       R        R       R        q59 |  |
 |  | q58       L         L       R        q59 |  |
 |  | q58        S         S       R       q59 |  |
-|  | q59      q          Q      R        q60 | Lidando com o estado que deve ir |
+| xix | q59      q          Q      R        q60 | **INICIA LEITURA DO ESTADO DE DESTINO** |
 |  | q60      4          4        R       q60 |  |
-| 8 | q60      1          4       L        q61 | Copiando para o inicio da fita e indica que não é final |
-|  | q60      f           f         L       q75 |  |
-|  | q60       $          $       L        q64 | Indica que terminou de ler o estado que deve ir |
-|  | q60        #          #      L        q64 | Indica que terminou de ler o estado que deve ir |
+| xiv | q60      1          4       L        q61 | **ATUALIZANDO ESTADO NA MEMÓRIA PRINCIPAL** |
+| viii | q60      f           f         L       q75 | **DETECTOR DE ESTADO FINAL** |
+| xx | q60       $          $       L        q64 | **FINALIZA A CÓPIA DO ESTADO DE DESTINO** |
+| xx | q60        #          #      L        q64 | **FINALIZA A CÓPIA DO ESTADO DE DESTINO** |
 |  | q61     !@       ~        L         q61 |  |
 |  | q61      @      @        L        q66 |  |
 |  | q66      T          t        L       q62 |  |
@@ -171,8 +159,8 @@
 |  | q64        2      1        L         q64 |  |
 |  | q64        A       a       L          q64 |  |
 |  | q64       □       □      L         q66 |  |
-| 9 | q64        #       #       L         q65 | Indica que a transição não é a primeira transição da fita |
-|  | q64        @       @     L        q8 | Indica que posso começar a procurar o novo estado |
+| xv | q64        #       #       L         q65 | **CONTINUA LIMPEZA DE MARCADORES 'F’** |
+| i | q64        @       @     L        q8 | **PONTO DE PARTIDA DO CICLO DE SIMULAÇÃO** |
 |  | q65       !F        ~      L        q65 |  |
 |  | q65       F          q      L       q64 |  |
 |  | q66       !$        ~       R       q66 |  |
@@ -184,9 +172,9 @@
 |  | q70      $         $        R       q71 |  |
 |  | q71       !A       ~        R      q71 |  |
 |  | q71        A        A        R     q54 |  |
-|  | q72      !□       ~        R      q73 |  |
-|  | q73       □       #         R      q74 |  |
-|  | q74       □        R         S      `q69` |  |
+|  | q72      !□       ~        R      q72 |  |
+|  | q72      □         #        R      q74 |  |
+|  | q74       □        R         S      **`q69`** |  |
 |  | q75      4         1       L       q75 |  |
 |  | q75      Q        q        L       q75 |  |
 |  | q75      R          R       L       q75 |  |
@@ -196,7 +184,40 @@
 |  | q75        #       #       L         q75 |  |
 |  | q75        A       a       L          q75 |  |
 |  | q75        @      □      L          q76 |  |
-|  | q76       !□       □      L          q76 |  |
+|  | q76       T       □      L          q76 |  |
+|  | q76       t       □      L          q76 |  |
+|  | q76       3       □      L          q76 |  |
+|  | q76       1       □      L          q76 |  |
 |  | q76      □         □      R          q77 |  |
-|  | q77     !q       ~       R         q66 |  |
+|  | q77     !q       ~       R         q77 |  |
+|  | q77     q       q       R         q66 |  |
 
+## Pontos Importantes
+
+1. **PONTO DE PARTIDA DO CICLO DE SIMULAÇÃO:** Depois de terminar um passo (ou fazer uma limpeza), este estado te manda de volta para o começo da fita. A partir dali, ele pula para `q8` para recomeçar o ciclo: ler o estado atual da máquina, procurar uma regra que sirva, executá-la, e assim por diante.
+2. **INÍCIO DA VERIFICAÇÃO DE UMA REGRA:** É aqui que a máquina começa a testar se uma regra pode ser usada. O `q` da regra é marcado com um `Q` para mostrar que está sendo verificado. Se algo der errado no meio do caminho, a lógica em `q30` vai trocar esse `Q` por um `F`, indicando falha.
+3. **GATILHO DE FALHA DE COMBINAÇÃO:** Se o estado atual da máquina ou o símbolo na fita não batem com o que a regra exige, a máquina vem para este ponto. Aqui, ela marca a regra que falhou com um `F` e já começa a se preparar para buscar a próxima, limpando a bagunça e pulando para `q36`.
+4. **DECISÃO DE MOVIMENTO:** Este estado (`q45`) simplesmente lê qual é a direção do movimento (esquerda, direita ou parado) que a regra manda fazer.
+5. **INÍCIO DA COMPARAÇÃO DE SÍMBOLO:** O estado `q17` dá o pontapé inicial para comparar o símbolo que a regra espera com o símbolo que está de fato na fita.
+6. **INICIO DA SIMULAÇÃO:** O bloco (`q3`-`q7`) é executado apenas uma vez, bem no comecinho. Ela faz duas coisas simples: primeiro, marca onde a cabeça de leitura está na palavra usando a letra `A`. Depois, volta lá para o início de tudo e escreve o estado inicial da máquina (`@t1`).
+7. **REJEIÇÃO - FIM DAS REGRAS:** O estado `q36` fica procurando a próxima regra (o próximo `#`). Se em vez disso ele achar um `$`, é porque não há mais regras para testar e nenhuma funcionou. A máquina então desiste e vai para `q72` escrever `#R`.
+8. **DETECTOR DE ESTADO FINAL:** Ao ler o estado de destino de uma regra, o estado `q60` fica de olho. Se ele encontrar a letra `f`, ele já sabe: se essa transição for até o fim, a simulação será um sucesso e o resultado será **ACEITO** (`#A`)
+9. **SUCESSO NA COMPARAÇÃO DE ESTADO:** Quando a máquina chega aqui e encontra um espaço em branco (`□`), é um bom sinal. Significa que o estado da regra e o estado atual da máquina combinaram perfeitamente. Com o estado confirmado, a máquina segue para `q16` para começar a comparar o símbolo na fita.
+10. **VERIFICA INÍCIO DO SÍMBOLO 'a...':** Essa transição checa se o símbolo na regra começa com `a`. Se sim, ela o marca com um `A` temporário e segue para `q18`, pronta para comparar o resto do símbolo (a parte dos `1`s).
+11. **PASSO 1 DO PING-PONG (PALAVRA -> REGRA):** Aqui começa um vai e vem para validar o símbolo. A máquina acha um `1` na palavra, marca que já o viu (trocando por `2`) e viaja de volta para a área das regras para achar o `1` correspondente por lá.
+12. **PASSO 2 DO PING-PONG (REGRA -> PALAVRA):** Agora a volta do "ping-pong". A máquina encontra o `1` correspondente na regra, o marca como verificado (`2`) e inicia a viagem de volta para a palavra, para continuar a comparação.
+13. **ESCREVENDO UM DÍGITO DO NOVO SÍMBOLO:** A máquina está no processo de escrita. Ela está basicamente copiando um `1` do novo símbolo (que está na regra) para a posição atual da cabeça de leitura (`A`), usando um `4` como marcador temporário.
+14. **ATUALIZANDO ESTADO NA MEMÓRIA PRINCIPAL:** A máquina está atualizando seu próprio estado. Ela lê um `1` do estado de destino da regra e usa o marcador `4` para não se perder no processo de cópia para a sua área de memória (`@t...`).
+15. **CONTINUA LIMPEZA DE MARCADORES 'F':** Na fase de faxina (`q64`), se a máquina encontra um `#`, ela sabe que ainda não voltou ao começo da lista de regras. Então, ela continua indo para a esquerda (`L`) através de `q65`, procurando mais marcadores `F` para apagar.
+16. **FALHA NA COMPARAÇÃO DE ESTADO:** 
+Se no meio da comparação de estados (em `q13`) a máquina encontra um `a`, significa que o estado da regra é mais curto que o estado atual da máquina. Essa diferença causa uma falha, forçando um desvio para a rotina de erro em `q30`.
+17. **FINALIZA MOVIMENTO DO CABEÇOTE:** Depois de se mover, a máquina encontra a célula de destino, a define como a nova posição da cabeça de leitura e pula para `q56`. De lá, ela começa o processo de atualizar sua memória de estado (`@t...`).
+18. **TRATA MOVIMENTO (DIREITA) PARA CÉLULA VAZIA:** Este é um caso especial. Se a ordem é mover para a direita (`R`) e a máquina cai numa célula vazia (`□`), ela nem se dá ao trabalho de marcar uma nova posição. Simplesmente vai direto para `q56` para atualizar a memória de estado.
+19. **INICIA LEITURA DO ESTADO DE DESTINO:** A máquina se posiciona bem no comecinho do estado de destino da regra que acabou de combinar. Ela marca o `q` com um `Q` e entra em `q60`, se preparando para copiar esse novo estado para sua memória principal (`@t...`).
+20. **FINALIZA A CÓPIA DO ESTADO DE DESTINO.** Enquanto está copiando o estado em `q60`, encontrar um `$` ou um `#` avisa que os `1`s do estado acabaram. A máquina então pula para `q64` para limpar todos os marcadores temporários e se preparar para o próximo ciclo da simulação.
+
+## Entradas Testas
+
+|  | Entrada | Saída |
+| --- | --- | --- |
+| ✅ | q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a1a11 | q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a11A111 |
