@@ -238,3 +238,7 @@ Se no meio da comparação de estados (em `q13`) a máquina encontra um `a`, sig
 |  | Entrada | Saída |
 | --- | --- | --- |
 | ✅ | q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a1a11 | q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a11A111 |
+| q1a11a111Rq11#q11a11a111Sqf#q1a111a11Rq11$a1a11
+| q1a11a111#q11a11a111Sqf#q1a1a11Rq11$a1a11
+| q1a11a111Rq11#q11a11a111#q1a1a11Rq11$a1a11  XXX Q45
+| q1a11a111Rq11#q11a11a111Sqf#q1a111a11Rq11$a111a11 xxxx Q42
