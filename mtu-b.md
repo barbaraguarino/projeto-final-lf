@@ -1,21 +1,28 @@
 ## Guia de Identificação para Possíveis Caminhos a Seguir
 
-1. Se encontrar L no lugar de R, deve seguir para a esquerda na palavra
+1. 
+
+## Atenção!
+
+- Quando a transição que não é verificada esta com a escrita incorreta, a máquina aceita mesmo assim, pois não lê a transição completamente.
+- Verificar os estados `q75`, `q66` e `q49` com o modelo no no JFLAP
+- Reverificar os estados com loop de transições escritas um por um.
 
 ## O que falta?
 
 - [x]  **Movimento para a Esquerda (`L`)**: `q54` cobre o movimento para a direita (`R`). Falta o movimento à esquerda (`L`).
-- [ ]  **Tratamento do Símbolo Branco (`b`)**: tratar os casos em que não exista a ou 1 e sim `b`
-- [ ]  **Se encontrar vazio**: Se o cabeçote estiver no vazio.
+- [ ]  **Tratamento do Símbolo Branco (`b`)**: tratar os casos em que não exista `a` ou `1` e sim `b`
+- [ ]  **Se encontrar vazio**: Se o cabeçote estiver no vazio, o que fazer?
 - [ ]  **Movimento para a Esquerda no Início da Fita**: Tratar os casos onde o cabeçote deve se mover para o início da palavra
-- [ ]  **Quando for Escrever o Símbolo ele Diminui de Tamanho**: fazer a solução para quando ele for escrever um símbolo a11 no lugar de a111 ele deslocar para a esquerda o resto da palavra.
+- [x]  **Quando for Escrever o Símbolo ele Diminui de Tamanho**: fazer a solução para quando ele for escrever um símbolo a11 no lugar de a111 ele deslocar para a esquerda o resto da palavra.
 
 ## Máquina de Turing Universal
 
 | ‼️ | Transição | Anotação |
 | --- | --- | --- |
 |  | q0    q       q         R      q1 | **INICIO DA FITA** |
-|  | q1    1        1        R        q2 |  |
+|  | q1    1        1        R        q9 |  |
+|  | q9      a       a       R      q2 |  |
 |  | q2    !$       ~       R        q2 |  |
 |  | q2     $       $       R       q3 |  |
 |  | q3      a       A       L       q4 |  |
@@ -31,7 +38,7 @@
 |  | q11     @       @    R    q12 |  |
 | ii | q12      q       Q     R     q13 | **INÍCIO DA VERIFICAÇÃO DE UMA REGRA** |
 |  | q12      Q        Q     R    q13 |  |
-|  | q13      F         F       R     q36 |  |
+|  | q12      F         F       R     q36 |  |
 |  | q13      2       2       R      q13 |  |
 |  | q13      1        2      L     q14 |  |
 | xvi | q13      a         a      L     q30 | **FALHA NA COMPARAÇÃO DE ESTADO** |
@@ -43,14 +50,15 @@
 |  | q16     !Q       ~       R      q16 |  |
 |  | q16      Q        Q      R       q17 |  |
 | v | q17      2         2       R      q17 | **INÍCIO DA COMPARAÇÃO DE SÍMBOLO** |
-| x | q17      a         A       R       q18 | **VERIFICA INÍCIO DO SÍMBOLO 'a...’** |
+|  | q17      b         B       R       q95 | se encontrar um b para ler |
+| x | q17      a         A       R       q18 | **VERIFICA INÍCIO DO SÍMBOLO 'a...’ marco A** |
 |  | q17       1        1      L        q38 |  |
 |  | q18      1         2        R       q19 |  |
 |  | q19     !$        ~        R        q19 |  |
 |  | q19      $       $        R       q20 |  |
 |  | q20     a       a       R        q20 |  |
 |  | q20     1       1       R        q20 |  |
-|  | q20      A        A       R        q21 |  |
+|  | q20      A        A       R        q21 |   |
 |  | q21      2        2       R         q21 |  |
 | xi | q21      1        2       L          q22 | **PASSO 1 DO PING-PONG (PALAVRA -> REGRA)** |
 |  | q21       a       a      L          q25 |  |
@@ -60,11 +68,25 @@
 |  | q23        2       2       R        q24 |  |
 |  | q24       2        2       R        q24 |  |
 | xii | q24        1        2      R         q19 | **PASSO 2 DO PING-PONG (REGRA -> PALAVRA)** |
-|  | q24        a        A     R         q39 |  |
+|  | q24        a        a     R         q107 |  |
+|  | q107      !$       ~     R         q107 |  |
+|  | q107       $        $      R       q108 |  |
+|  | q108      a         a       R       q108 |  |
+|  | q108      1         1       R       q108 |  |
+|  | q108       A        A      R       q109 |  |
+|  | q109        2        2       R       q109 |  |
+|  | q109        1       1       L        q25 |  |
+|  | q109        a       a       L       q110 |  |
+|  | q109        □       □       L       q110 |  |
+|  | q110       !$     ~     L       q110 |  |
+|  | q110        $         $     L      q111 |  |
+|  | q111       !2        ~      L      q111 |  |
+|  | q111       2         2       R     q112 |  |
+|  | q112       a         A         R     q39 |  |
 |  | q25         2       1      L         q25 |  |
 |  | q25         A       A     L         q26 |  |
-|  | q26         !$       ~       L       q27 |  |
-|  | q27         $        $        L       q28 |  |
+|  | q26         !$       ~       L       q26 |  |
+|  | q26         $        $        L       q28 |  |
 |  | q28         !2       ~        L      q28 |  |
 |  | q28        2         1        L       q29 |  |
 |  | q29        2          1         L     q29 |  |
@@ -106,15 +128,23 @@
 |  | q42       4        4        R       q42 |  |
 | xiii | q42       2        4        L        q43 | **ESCREVENDO UM DÍGITO DO NOVO SÍMBOLO** |
 |  | q42       a        a        S         q46 |  |
+|  | q42       1        1        S        q83 |  |
 |  | q42      □         4        S        q43 |  |
 |  | q43      !$       ~        L        q43 |  |
 |  | q43      $         $        L        q44 |  |
-|  | q44      !2         $         L      q44 |  |
+|  | q44      !2         ~         L      q44 |  |
 |  | q44       2        2        R       q45 |  |
 |  | q45        1       2        R      q40 |  |
-| iv | q45        R        R       R      q52 | **DECISÃO DE MOVIMENTO (R)** |
-| iv | q45        S         S       R     q70 | **DECISÃO DE MOVIMENTO (S)** |
-| iv | q45      L         L       R      q78 | **DECISÃO DE MOVIMENTO (L)** |
+|  | q45        R       R        R      q118 |  |
+|  | q45        S       S        R      q118 |  |
+|  | q45        L       L        R      q118 |  |
+|  | q118      !$       ~       R     q118 |  |
+|  | q118      $        $       R      q119 |  |
+|  | q119      !4      ~       R      q119 |  |
+|  | q119       4      4       R       q120 |  |
+|  | q120      4        4      R     q120 |  |
+|  | q120      2        2        S     q83 |  |
+|  | q120     a         a       L      q121 |  |
 |  | q46       !□       ~       R       q46 |  |
 |  | q46       □         □       L        q47 |  |
 |  | q47       1          □      R        q48 |  |
@@ -122,9 +152,9 @@
 |  | q49       !□       ~        L       q49 |  |
 |  | q49        1        □        R       q48 |  |
 |  | q49         a       □        R       q50 |  |
-|  | q49       4         4        R       51 |  |
-|  | q50        □         a       L        49 |  |
-|  | q51       □          4        L        43 |  |
+|  | q49       4         4        R       q51 |  |
+|  | q50        □         a       L        q49 |  |
+|  | q51       □          4        L        q43 |  |
 |  | q52       !$         ~       R       q52 |  |
 |  | q52       $           $       R      q53 |  |
 |  | q53      a          a       R       q53 |  |
@@ -176,13 +206,45 @@
 |  | q70      $         $        R       q71 |  |
 |  | q71       a       a        R      q71 |  |
 |  | q71       1       1        R      q71 |  |
-|  | q71        A        A        R     q54 |  |
+|  | q71        A        A        R     q56 |  |
 |  | q72      !□       ~        R      q72 |  |
 |  | q72      □         #        R      q74 |  |
-|  | q74       □        R         S      **`q69`** |  |
+|  | q74       □        R         L      q113 |  |
+|  | q113    #         #      L        q113 |  |
+|  | q113    2         1      L        q113 |  |
+|  | q113    5         1      L        q113 |  |
+|  | q113     a          a      L        q113 |  |
+|  | q113     A        A      L        q113 |  |
+|  | q113     1        1        L        q113 |  |
+|  | q113      $        $       L       q114 |  |
+|  | q114      A         a       L       q114 |  |
+|  | q114      2        1        L       q114 |  |
+|  | q114      1        1        L       q114 |  |
+|  | q114      a        a        L       q114 |  |
+|  | q114      Q         q       L       q114 |  |
+|  | q114      q         q       L       q114 |  |
+|  | q114      F         q       L       q114 |  |
+|  | q114      #         #       L       q114 |  |
+|  | q114      f         f       L       q114 |  |
+|  | q114      b         b       L       q114 |  |
+|  | q114      B         b       L       q114 |  |
+|  | q114      R         R       L       q114 |  |
+|  | q114      L         L       L       q114 |  |
+|  | q114      S         S       L       q114 |  |
+|  | q114      s         s       L       q114 |  |
+|  | q114      @       □      L        q115 |  |
+|  | q115      t          □     L       q115 |  |
+|  | q115      T          □     L       q115 |  |
+|  | q115      3          □     L       q115 |  |
+|  | q115      1         □     L       q115 |  |
+|  | q115      □          □     R       q116 |  |
+|  | q116     !$         ~     R       q116 |  |
+|  | q116     $         $       R       `q69` |  |
 |  | q75      4         1       L       q75 |  |
 |  | q75      Q        q        L       q75 |  |
 |  | q75      R          R       L       q75 |  |
+|  | q75       q         q        L        q75 |  |
+|  | q75       1         1        L        q75 |  |
 |  | q75       L         L        L        q75 |  |
 |  | q75       S          S       L       q75 |  |
 |  | q75        2      1        L         q75 |  |
@@ -208,6 +270,66 @@
 |  | q81     N        a        L        q82 |  |
 |  | q82      1        1       L         q82 |  |
 |  | q82       a        A       L        q56 |  |
+|  | q83       2        2        R         q83 |  |
+|  | q83        □         □        L        q92 |  |
+|  | q83       a         2       L          q84 |  |
+|  | q84        2         2       L          q84 |  |
+|  | q84         4         4       R        q85 |  |
+|  | q85         2         a        R       q86 |  |
+|  | q86        !2        ~        R       q86 |  |
+|  | q86        2         2        R        q87 |  |
+|  | q87       2         2        R       q87 |  |
+|  | q87        1          2        L         q88 |  |
+|  | q87       a           2        L         q90 |  |
+|  | q87       □           □       L         q92 |  |
+|  | q88        !a         ~        L       q88 |  |
+|  | q88         a          a       R      q89 |  |
+|  | q89        5           5       R      q89 |  |
+|  | q89         1          5       R        q86 |  |
+|  | q89         2         5        R        q86 |  |
+|  | q90         !5         ~      L        q90 |  |
+|  | q90        5           5       R       q91 |  |
+|  | q91       5          5        R        q91 |  |
+|  | q91       1          a        R        q86 |  |
+|  | q91       2          a         R        q86 |  |
+|  | q92       2        □         L         q92 |  |
+|  | q92        5         1         L        q92 |  |
+|  | q92        a          a         L        q92 |  |
+|  | q92        4          4       L         q121 |  |
+|  | q121      !$      ~       L         q121 |  |
+|  | q121      $        $      L         q122 |  |
+|  | q122     !2      ~        L       q122 |  |
+|  | q122      2       2     R       q123 |  |
+| iv | q123        R        R       R       q52 | **DECISÃO DE MOVIMENTO (R)** |
+| iv | q123        S         S       R       q70 | **DECISÃO DE MOVIMENTO (S)** |
+| iv | q123      L         L       R      q78 | **DECISÃO DE MOVIMENTO (L)** |
+|  |  |  |
+|  | q95     !$          ~        R       q95 |  |
+|  | q95      $        $          R       q96 |  |
+|  | q96      a         a          R       q96 |  |
+|  | q96      1         1          R       q96 |  |
+|  | q96        A        A        L       q97 |  |
+|  | q97        !B       ~       L       q97 |  |
+|  | q97        B        b        R       q28 |  |
+|  | q96        □         □        L       q98 |  |
+|  | q98      !$         $         L       q98 |  |
+|  | q98       $         $        L       q99 |  |
+|  | q99        !B        ~       L      q100 |  |
+|  | q100     B         B       R       q101 |  |
+|  | q101    a         A       R        q102 | se encontrar a, tem que escrever a no vazio ao final da palavra |
+|  | q101     b        B       R      | se encontrar b, quer dizer que não precisa fazer nada |
+|  | q102      !$      ~       R      q102 |  |
+|  | q102      $      $        R      q103 |  |
+|  | q103       a         a      R     q103 |  |
+|  | q103       1         1      R    q103 |  |
+|  | q103       □         A      L     q104 |  |
+|  | q104      !$        ~        L     q104 |  |
+|  | q104       $        $      L        q105 |  |
+|  | q105      !A     ~       L        q105 |  |
+|  | q105       A        A     R      q106 |  |
+|  | q106       2        2      R    q106 |  |
+|  | q106        1        2       R    q42 |  |
+|  |  |  |
 
 ## Pontos Importantes
 
@@ -238,7 +360,15 @@ Se no meio da comparação de estados (em `q13`) a máquina encontra um `a`, sig
 |  | Entrada | Saída |
 | --- | --- | --- |
 | ✅ | q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a1a11 | q1a11a111Rq11#q11a11a111Sqf#q1a1a11Rq11$a11A111 |
-| q1a11a111Rq11#q11a11a111Sqf#q1a111a11Rq11$a1a11
-| q1a11a111#q11a11a111Sqf#q1a1a11Rq11$a1a11
-| q1a11a111Rq11#q11a11a111#q1a1a11Rq11$a1a11  XXX Q45
-| q1a11a111Rq11#q11a11a111Sqf#q1a111a11Rq11$a111a11 xxxx Q42
+| ✅ | q1a11a111Rq11#q11a11a111#q1a1a11Rq11$a1a11 | Trava |
+|  | q1a1a1Rqf$a1 | q1a1a1Rqf$a1#A |
+|  | q1a1a1Sqf$a1 | q1a1a1Sqf$A1#A |
+|  | q1a1a11Rqf$a1 | q1a1a11Rqf$a11#A |
+|  | q1a1a11Sqf$a1 | q1a1a11Sqf$A11#A |
+|  | q1a1a1Rq11#q11ba1Lqf$a1 | q1a1a1Rq11#q11ba1Lqf$A1a1#A |
+|  | q1a1bLqf$a1a1 | q1a1bLqf$a1#A |
+|  | q1a1a1Xqf$a1 | Deve Travar |
+|  | q1a1a1Rqf#a1 | Deve Travar |
+|  | q1a1a1Rqf$a1c11 | Deve Travar |
+|  | q1a1a1Rq11$a11 | q1a1a1Rq11$a11#R |
+|  | q1a1a1Rq1$a1 | Não Para |
