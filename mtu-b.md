@@ -4,7 +4,7 @@
 
 ## O que falta?
 
-- [ ]  **Movimento para a Esquerda (`L`)**: `q54` cobre o movimento para a direita (`R`). Falta o movimento à esquerda (`L`).
+- [x]  **Movimento para a Esquerda (`L`)**: `q54` cobre o movimento para a direita (`R`). Falta o movimento à esquerda (`L`).
 - [ ]  **Tratamento do Símbolo Branco (`b`)**: tratar os casos em que não exista a ou 1 e sim `b`
 - [ ]  **Movimento para a Esquerda no Início da Fita**: Tratar os casos onde o cabeçote deve se mover para o início da palavra
 - [ ]  **Quando for Escrever o Símbolo ele Diminui de Tamanho**: fazer a solução para quando ele for escrever um símbolo a11 no lugar de a111 ele deslocar para a esquerda o resto da palavra.
@@ -47,7 +47,8 @@
 |  | q18      1         2        R       q19 |  |
 |  | q19     !$        ~        R        q19 |  |
 |  | q19      $       $        R       q20 |  |
-|  | q20     !A       ~       R        q20 |  |
+|  | q20     a       a       R        q20 |  |
+|  | q20     1       1       R        q20 |  |
 |  | q20      A        A       R        q21 |  |
 |  | q21      2        2       R         q21 |  |
 | xi | q21      1        2       L          q22 | **PASSO 1 DO PING-PONG (PALAVRA -> REGRA)** |
@@ -98,7 +99,8 @@
 |  | q39      1        2          R      q40   |  |
 |  | q40     !$       ~         R       q40 |  |
 |  | q40       $       $        R       q41 |  |
-|  | q41       !A      ~       R       q41 |  |
+|  | q41       a      a       R       q41 |  |
+|  | q41       1      1       R       q41 |  |
 |  | q41        A       A       R       q42 |  |
 |  | q42       4        4        R       q42 |  |
 | xiii | q42       2        4        L        q43 | **ESCREVENDO UM DÍGITO DO NOVO SÍMBOLO** |
@@ -111,7 +113,7 @@
 |  | q45        1       2        R      q40 |  |
 | iv | q45        R        R       R      q52 | **DECISÃO DE MOVIMENTO (R)** |
 | iv | q45        S         S       R     q70 | **DECISÃO DE MOVIMENTO (S)** |
-| iv | q45      L         L       R      q… | **DECISÃO DE MOVIMENTO (L)** |
+| iv | q45      L         L       R      q78 | **DECISÃO DE MOVIMENTO (L)** |
 |  | q46       !□       ~       R       q46 |  |
 |  | q46       □         □       L        q47 |  |
 |  | q47       1          □      R        q48 |  |
@@ -124,7 +126,8 @@
 |  | q51       □          4        L        43 |  |
 |  | q52       !$         ~       R       q52 |  |
 |  | q52       $           $       R      q53 |  |
-|  | q53      !A          ~       R       q53 |  |
+|  | q53      a          a       R       q53 |  |
+|  | q53      1          1       R       q53 |  |
 |  | q53       A         a        R        q54 |  |
 |  | q54       4          1        R       q54 |  |
 | xvii | q54       a           A       L       q56 | **FINALIZA MOVIMENTO DO CABEÇOTE** |
@@ -170,7 +173,8 @@
 |  | q68      □          A         S     **`q69`** |  |
 |  | q70     !$         ~        R      q70 |  |
 |  | q70      $         $        R       q71 |  |
-|  | q71       !A       ~        R      q71 |  |
+|  | q71       a       a        R      q71 |  |
+|  | q71       1       1        R      q71 |  |
 |  | q71        A        A        R     q54 |  |
 |  | q72      !□       ~        R      q72 |  |
 |  | q72      □         #        R      q74 |  |
@@ -191,6 +195,18 @@
 |  | q76      □         □      R          q77 |  |
 |  | q77     !q       ~       R         q77 |  |
 |  | q77     q       q       R         q66 |  |
+|  | q78    !$        ~       R        q78 |  |
+|  | q78     $        $         R       q79 |  |
+|  | q79     a         a        R       q79 |  |
+|  | q79     1        1         R       q79 |  |
+|  | q79      A       N         R       q80 |  |
+|  | q80      4        1        R        q80 |  |
+|  | q80      a        a        L        q81      |  |
+|  | q80     □         □       L         q81 |  |
+|  | q81     !N       ~       L        q81 |  |
+|  | q81     N        a        L        q82 |  |
+|  | q82      1        1       L         q82 |  |
+|  | q82       a        A       L        q56 |  |
 
 ## Pontos Importantes
 
