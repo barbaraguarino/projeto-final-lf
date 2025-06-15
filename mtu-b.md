@@ -6,6 +6,7 @@
 
 - [x]  **Movimento para a Esquerda (`L`)**: `q54` cobre o movimento para a direita (`R`). Falta o movimento à esquerda (`L`).
 - [ ]  **Tratamento do Símbolo Branco (`b`)**: tratar os casos em que não exista a ou 1 e sim `b`
+- [ ]  **Se encontrar vazio**: Se o cabeçote estiver no vazio.
 - [ ]  **Movimento para a Esquerda no Início da Fita**: Tratar os casos onde o cabeçote deve se mover para o início da palavra
 - [ ]  **Quando for Escrever o Símbolo ele Diminui de Tamanho**: fazer a solução para quando ele for escrever um símbolo a11 no lugar de a111 ele deslocar para a esquerda o resto da palavra.
 
