@@ -372,3 +372,22 @@ Se no meio da comparação de estados (em `q13`) a máquina encontra um `a`, sig
 |  | q1a1a1Rqf$a1c11 | Deve Travar |
 |  | q1a1a1Rq11$a11 | q1a1a1Rq11$a11#R |
 |  | q1a1a1Rq1$a1 | Não Para |
+
+
+q72 [a, b] ~ R q77
+q78 [v, b, a] ~ L q79
+q79 2 2 L q79
+q79 A A L q80
+q80 !2 ~ L q80
+q80 2 2 R q81
+q81 a A R q90
+q81 b B R q91
+q91 !A ~ R q91
+q91 A B R q92
+q92 2 2 R q92
+q92 b b L q94
+q92 v v L q95
+q95 2 v L q95
+q95 B B L q54
+q92 a 2 L q93
+
