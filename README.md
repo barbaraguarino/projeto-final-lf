@@ -4,7 +4,7 @@ Projeto final da disciplina de Linguagens Formais e Teoria da Computação.
 
 ## Sobre o Projeto
 
-Este repositório contém a implementação de uma **Máquina de Turing Universal (MTU) Determinística**, desenvolvida inteiramente na ferramenta JFLAP. [cite_start]O objetivo do projeto é criar uma Máquina de Turing capaz de simular qualquer outra Máquina de Turing Determinística (`M`) a partir de uma descrição de suas regras e uma palavra de entrada (`w`).
+Este repositório contém a implementação de uma **Máquina de Turing Universal (MTU) Determinística**, desenvolvida inteiramente na ferramenta JFLAP. O objetivo do projeto é criar uma Máquina de Turing capaz de simular qualquer outra Máquina de Turing Determinística (`M`) a partir de uma descrição de suas regras e uma palavra de entrada (`w`).
 
 A fita da máquina é finita à esquerda e infinita à direita.
 
@@ -44,7 +44,6 @@ A MTU simula a execução de `M` sobre a palavra `w`. A simulação para sob dua
     ```
     q1a1a11Rq11#q11a11a111Lqf#q11a1a11Rq1$a1a11
     ```
-    [cite_start][cite: 16]
 
 4.  **Execute:** Inicie a simulação para observar o comportamento da MTU.
 
