@@ -47,7 +47,7 @@ A MTU simula a execução de `M` sobre a palavra `w`. A simulação para sob dua
 
 4.  **Execute:** Inicie a simulação para observar o comportamento da MTU.
 
-##  deliverables Estrutura do Repositório
+##  Estrutura do Repositório
 
 Conforme os entregáveis solicitados:
 
