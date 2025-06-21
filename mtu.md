@@ -1,4 +1,4 @@
-# Máquina de Turing v5.0
+# Máquina de Turing v3.0
 
 ## Anotações
 
@@ -6,11 +6,11 @@
 
 ## O Fazer?
 
-- [ ]  Escrever A em cima de A
+- [x]  Escrever A em cima de A
 - [x]  Escrever B em cima de A
-- [ ]  Copiar o estado final para a memoria da máquina
-- [ ]  Configurar para identificar o estado final da transição
-- [ ]  Escrever aceitar palavra na fita
+- [x]  Copiar o estado final para a memoria da máquina
+- [x]  Configurar para identificar o estado final da transição
+- [x]  Escrever aceitar palavra na fita
 
 ## Máquina de Turing
 
@@ -77,6 +77,7 @@
 |  | q26 ; F ; q ; L ; q26 | LIMPANDO A FITA. Desmarcando as transição não compatíveis com a memoria |
 |  | q26 ; Q ; q ; L ; q26 | LIMPANDO A FITA. |
 |  | q26 ; B ; b ; L ; q26 | LIMPANDO A FITA.  |
+| N | q26 ; 5 ; 1 ; L ; q26 | LIMPANDO A FITA.  |
 |  | q26 ; S ; s ; L ; q26 | LIMPANDO A FITA. |
 |  | q26 ; A ; a ; L ; q26 | LIMPANDO A FITA. |
 |  | q26 ; r ; R ; L ; q26 | LIMPANDO A FITA. |
@@ -108,7 +109,20 @@
 | N | q37 ; a ; A ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. O cabeçote foi para o inicio da fita. Agora deve voltar a transição e copiar o estado final para a memoria da máquina |
 | N | q37 ; b ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. O cabeçote foi para o inicio da fita. Agora deve voltar a transição e copiar o estado final para a memoria da máquina |
 | N | q37 ; □ ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. Encontrou vazio, deve voltar para a transição e gravar na memoria da máquina o estado final |
-| N | q38 ;  | COPIAR O ESTADO FINAL PARA A MEMORIA |
+| N | q38 ; q ; Q ; R ; q39 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca o q para Q |
+| N | q39 ; 1 ; 1 ; S ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+| N | q42 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+| N | q42 ; 1 ; 5 ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA. Indica a leitura de um 1 no estado final |
+| N | q42 ; [#, $, %] ; ~ ; L ; q108 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+| N | q42 ; f ; f ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Encontrou f, indica que vai para o estado final |
+| N | q40 ; !□ ; ~ ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Vai até o final da fita. |
+| N | q40 ; □ ; Y ; L ; q25 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca Y no final da fita para indicar que a máquina aceita a palavra |
+| N | q41 ; !T ; ~ ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+| N | q41 ; T ; T ; L ; q43 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+| N | q43 ; 3 ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+| N | q43 ; □ ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+| N | q107 ; !5 ; ~ ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+| N | q107 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA |
 | D | q35 ; !B ; ~ ; L ; q35 | ESCREVEDO O SÍMBOLO NO VAZIO. Procurando B para escrever o símbolo da transição no primeiro espaço após o $.  |
 | D | q35 ; B ; B ; R ; q36 |  |
 | D | q36 ; a ; A ; R ; q39 | ESCREVEDO O SÍMBOLO NO VAZIO. Achou a, indica que deve escrever o símbolo a seguidos de ao menos um 1 no vazio após a palavra.  |
@@ -143,6 +157,7 @@
 |  | q51 ; !A ; ~ ; R ; q51 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Procura o A na palavra |
 |  | q51 ; A ; A ; R ; q52 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Encontrou A na palavra. Agora deve verificar o que tem do lado, se é necessário deslocar o resto da palavra para a direita. |
 |  | q52 ; 4 ; 4 ; R ; q52 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Passa por todos os 1s já escritos. |
+|  | q52 ; 2 ; 4 ; R ; q53 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. |
 |  | q52 ; [a, b] ; ~ ; R ; q55 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. O resto da palavra deve ser deslocada para a direita para abrir espaço para a escrita.  |
 |  | q52 ; □ ; 4 ; L ; q53 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Encontrou vazio, ou seja, pode escrever e deve voltar para o loop de leitura e escrita do símbolo |
 |  | q53 ; !2 ; ~ ; L ; q53 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Voltar para a transição para terminar de ler a palavra que deve ser escrita. |
@@ -171,7 +186,7 @@
 |  | q64 ; S ; s ; L ; q18 | DESMARCA O SÍMBOLO DE LEITURA S. Desmarcando o S da transição |
 | D | q65 ; !S ; ~ ; L ; q65 | VERIFICANDO O DESLOCAMENTO DO CABEÇOTE |
 | D | q65 ; S ; S ; R ; q44 | VERIFICANDO O DESLOCAMENTO DO CABEÇOTE |
-| N | q66 ; Y ; # ; R ; q96 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #A no final da fita |
+| N | q66 ; Y ; # ; R ; q112 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #A no final da fita |
 | N | q66 ; N ; # ; R ; q30 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #R no final da fita |
 |  | q67 ; !□ ; ~ ; R ; q67 | VERIFICANDO SE O CABEÇOTE ESTA NO A NA PALAVRA. Indo para o final da palavra.  |
 |  | q67 ; □ ; □ ; L ; q68 | VERIFICANDO SE O CABEÇOTE ESTA NO A NA PALAVRA.  |
@@ -231,9 +246,7 @@
 | C | q81 ; a ; A ; R ; q90 | ESCREVENDO A EM CIMA DO A. Marcando o A que deve ser escrito. |
 | C | q81 ; b ; B ; R ; q91 | ESCREVENDO B EM CIMA DO A. Marcando o B que deve ser escrito. Deve voltar para a palavra e escrever.  |
 | C | q89 ; 1 ; 1 ; L ; q89 | MOVIMENTAR O CABEÇOTE PARA A ESQUERDA. Pula todos os possíveis 1s.  |
-| P | q90 ;  | ESCREVENDO A EM CIMA DO A.  |
-| N |  | ESCREVENDO A EM CIMA DO A.  |
-| N |  | ESCREVENDO A EM CIMA DO A.  |
+| N | q90 ; 1 ; 1 ; S ; q50 | ESCREVENDO A EM CIMA DO A. Confirma que existe ao menos um 1 depois do a.  |
 | C | q91 ; !A ; ~ ; R ; q91 | ESCREVENDO B EM CIMA DO A. Vai até a palavra. |
 | C | q91 ; A ; B ; R ; q92 | ESCREVENDO B EM CIMA DO A. Transforma A na palavra para B. Agora deve apagar todos os 1s que existem depois do A, ou seja, deve deslocar a palavra para a esquerda.  |
 | C | q92 ; 2 ; 2 ; R ; q92 | DESLOCAR A PALAVRA PARA A ESQUERDA. Pula todos os 1 que não serão sobrescrito |
@@ -264,7 +277,25 @@
 | N | q105 ; 2 ; 1 ; L ; q106 | DESMARCANDO O SÍMBOLO DE LEITURA NA TRANSIÇÃO. Limpando o 1 lido na transição |
 | N | q106 ; 2 ; 1 ; L ; q106 | DESMARCANDO O SÍMBOLO DE LEITURA NA TRANSIÇÃO. Limpando os 1s lidos na transição |
 | N | q106 ; A ; a ; L ; q18 | DESMARCANDO O SÍMBOLO DE LEITURA NA TRANSIÇÃO. Limpando o a lido na transição. Deve limpar o estado lido e marcar como F a transição.  |
-
+| N | q108 ; !□ ; ~ ; R ; q108 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q108 ; □ ; □ ; L ; q109 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q109 ; [a, 1, b, A, B] ; ~ ; L ; q109 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q109 ; 4 ; 1 ; L ; q109 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q109 ; [%, $] ; ~ ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; [#, 1, q, R, L, f, b, s] ; ~ ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; 2 ; 1 ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; F ; q ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; 5 ; 1 ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; r ; R ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; l ; L ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; B ; b ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; A ; a ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; Q ; q ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; @ ; @ ; L ; q111 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q111 ; [T, 1] ; ~ ; L ; q111 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q111 ; 2 ; □ ; L ; q111 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q111 ; □ ; □ ; R ; q22 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q116 ; □ ; A ; L ; `q31` | MARCA ACEITAR PALAVRA.  |
 
 ## Legenda
 
