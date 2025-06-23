@@ -76,7 +76,7 @@
 |  | q26 ; F ; q ; L ; q26 | LIMPANDO A FITA. Desmarcando as transição não compatíveis com a memoria |
 |  | q26 ; Q ; q ; L ; q26 | LIMPANDO A FITA. |
 |  | q26 ; B ; b ; L ; q26 | LIMPANDO A FITA.  |
-| N | q26 ; 5 ; 1 ; L ; q26 | LIMPANDO A FITA.  |
+|  | q26 ; 5 ; 1 ; L ; q26 | LIMPANDO A FITA.  |
 |  | q26 ; S ; s ; L ; q26 | LIMPANDO A FITA. |
 |  | q26 ; A ; a ; L ; q26 | LIMPANDO A FITA. |
 |  | q26 ; r ; R ; L ; q26 | LIMPANDO A FITA. |
@@ -91,7 +91,7 @@
 |  | q28 ; !q ; ~ ; R ; q28 | LIMPANDO A FITA. Voltando para o inicio da entrada. |
 |  | q28 ; q ; q ; R ; q29 | LIMPANDO A FITA.  |
 |  | q29 ; !□ ; ~ ; R ; q29 | VERIFICAR QUAL A MARCAÇÃO. Ir ao final da entrada para escrever #R no final |
-| N | q29 ; □ ; □ ; L ; q66 | VERIFICAR QUAL A MARCAÇÃO. |
+|  | q29 ; □ ; □ ; L ; q66 | VERIFICAR QUAL A MARCAÇÃO. |
 | | q30 ; □ ; R ; R ; **`q31`**  | MARCAR A PALAVRA COMO REJEITADA. Escrevendo R ao final da entrada e direcionando para o estado final da MTU. |
 |  | q32 ; !□ ; ~ ; R ; q32  | VERIFICADO SE O CABEÇOTE ESTÁ NO B. Ir pra o final da entrada para procurar a verificar a palavra da direita pela esquerda.   |
 |  | q32 ; □ ; □ ; L ; q33 | VERIFICADO SE O CABEÇOTE ESTÁ NO B. |
@@ -100,27 +100,27 @@
 |  | q33 ; [%, A] ; ~ ; L ; q34 | VERIFICADO SE O CABEÇOTE ESTÁ NO B. Indica que não é compatível, já que o cabeçote está no `s` ou `A`. Deve retorna a transição e marca-la como `F`.  |
 |  | q34 ; !B ; ~ ; L ; q34 | DESMARCAR SÍMBOLO DE LEITURA B DA TRANSIÇÃO. Procurando o B para desmarca-lo e marcar a transição como não compatível. |
 |  | q34 ; B ; b ; L ; q18 | DESMARCAR SÍMBOLO DE LEITURA B DA TRANSIÇÃO. Demarcando a leitura o b, pois o símbolo não bate com o símbolo apontado pelo cabeçote na palavra.  |
-| N | q35 ; !S ; ~ ; L ; q35 | LE O SÍMBOLO DE ESCRITA DEPOIS DO S COMO SÍMBOLO DE LEITURA |
-| N | q35 ; S ; S ; R ; q36 | LE O SÍMBOLO DE ESCRITA DEPOIS DO S COMO SÍMBOLO DE LEITURA |
-| N | q36 ; s ; S ; R ; q44 | LE O SÍMBOLO DE ESCRITA DEPOIS DO S COMO SÍMBOLO DE LEITURA |
-| N | q37 ; a ; A ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. O cabeçote foi para o inicio da fita. Agora deve voltar a transição e copiar o estado final para a memoria da máquina |
-| N | q37 ; b ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. O cabeçote foi para o inicio da fita. Agora deve voltar a transição e copiar o estado final para a memoria da máquina |
-| N | q37 ; □ ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. Encontrou vazio, deve voltar para a transição e gravar na memoria da máquina o estado final |
-| N | q38 ; q ; Q ; R ; q39 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca o q para Q |
-| N | q39 ; [1, f] ; ~ ; S ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
-| N | q42 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
-| N | q42 ; 1 ; 5 ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA. Indica a leitura de um 1 no estao final |
-| N | q42 ; [#, $, %] ; ~ ; L ; q108 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
-| N | q42 ; f ; f ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Encontrou f, indica que vai para o estado final |
-| N | q40 ; !□ ; ~ ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Vai até o final da fita. |
-| N | q40 ; □ ; Y ; L ; q25 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca Y no final da fita para indicar que a máquina aceita a palavra |
-| N | q41 ; !T ; ~ ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
-| N | q41 ; T ; T ; L ; q43 | COPIAR O ESTADO FINAL PARA A MEMORIA |
-| N | q43 ; 1 ; 1 ; R ; q43 | COPIAR O ESTADO FINAL PARA A MEMORIA |
-| N | q43 ; 3 ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
-| N | q43 ; □ ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
-| N | q107 ; !5 ; ~ ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
-| N | q107 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+| | q35 ; !S ; ~ ; L ; q35 | LE O SÍMBOLO DE ESCRITA DEPOIS DO S COMO SÍMBOLO DE LEITURA |
+|  | q35 ; S ; S ; R ; q36 | LE O SÍMBOLO DE ESCRITA DEPOIS DO S COMO SÍMBOLO DE LEITURA |
+|  | q36 ; s ; S ; R ; q44 | LE O SÍMBOLO DE ESCRITA DEPOIS DO S COMO SÍMBOLO DE LEITURA |
+|  | q37 ; a ; A ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. O cabeçote foi para o inicio da fita. Agora deve voltar a transição e copiar o estado final para a memoria da máquina |
+|  | q37 ; b ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. O cabeçote foi para o inicio da fita. Agora deve voltar a transição e copiar o estado final para a memoria da máquina |
+|  | q37 ; □ ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. Encontrou vazio, deve voltar para a transição e gravar na memoria da máquina o estado final |
+|  | q38 ; q ; Q ; R ; q39 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca o q para Q |
+|  | q39 ; [1, f] ; ~ ; S ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+|  | q42 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+| | q42 ; 1 ; 5 ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA. Indica a leitura de um 1 no estao final |
+|  | q42 ; [#, $, %] ; ~ ; L ; q108 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+|  | q42 ; f ; f ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Encontrou f, indica que vai para o estado final |
+|  | q40 ; !□ ; ~ ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Vai até o final da fita. |
+|  | q40 ; □ ; Y ; L ; q25 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca Y no final da fita para indicar que a máquina aceita a palavra |
+|  | q41 ; !T ; ~ ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+|  | q41 ; T ; T ; L ; q43 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+|  | q43 ; 1 ; 1 ; R ; q43 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+|  | q43 ; 3 ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+|  | q43 ; □ ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+|  | q107 ; !5 ; ~ ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+|  | q107 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA |
 |  | q44 ; R ; r ; R ; q82 | MOVIMENTAR O CABEÇOTE PARA A DIREITA. O cabeçote deve ir para a direita.  |
 |  | q44 ; L ; l ; R ; q87 | MOVIMENTAR O CABEÇOTE PARA A ESQUERDA. O cabeçote deve ir para a esquerda.  |
 |  | q45 ; !B ; ~ ; L ; q45 | ESCREVENDO O SÍMBOLO X NO B. Procurando o símbolo que de ser escrito que deve ser escrita.   |
@@ -170,7 +170,7 @@
 |  | q64 ; !S ; ~ ; L ; q64 | DESMARCA O SÍMBOLO DE LEITURA S. Procurando o S da transição |
 |  | q64 ; S ; s ; L ; q18 | DESMARCA O SÍMBOLO DE LEITURA S. Desmarcando o S da transição |
 |  | q66 ; Y ; # ; R ; q116 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #A no final da fita |
-| N | q66 ; N ; # ; R ; q30 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #R no final da fita |
+|  | q66 ; N ; # ; R ; q30 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #R no final da fita |
 |  | q67 ; !□ ; ~ ; R ; q67 | VERIFICANDO SE O CABEÇOTE ESTA NO A NA PALAVRA. Indo para o final da palavra.  |
 |  | q67 ; □ ; □ ; L ; q68 | VERIFICANDO SE O CABEÇOTE ESTA NO A NA PALAVRA.  |
 | | q68 ; [a, b, 1] ; ~ ; L ; q68 | VERIFICANDO SE O CABEÇOTE ESTA NO A NA PALAVRA. Passando por toda a palavra, da direita para a esquerda |
@@ -209,8 +209,8 @@
 |  | q85 ; □ ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. Encontrou vazio, deve voltar para a transição e gravar na memoria da máquina o estado final |
 |  | q85 ; a ; A ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. Encontrou a, deve voltar para a transição e gravar na memoria da máquina o estado final |
 |  | q85 ; b ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. Encontrou b, deve voltar para a transição e gravar na memoria da máquina o estado final |
-| N | q86 ; !r ; ~ ; L ; q86 | Procurando o estado final da transição executada. |
-| N | q86 ; r ; r ; R ; q38 | Procurando o estado final da transição executada. |
+|  | q86 ; !r ; ~ ; L ; q86 | Procurando o estado final da transição executada. |
+|  | q86 ; r ; r ; R ; q38 | Procurando o estado final da transição executada. |
 |  | q87 ; !□ ; ~ ; R ; q87 | MOVIMENTAR O CABEÇOTE PARA A ESQUERDA. Procura o final da palavra |
 |  | q87 ; □ ; □ ; L ; q88 | MOVIMENTAR O CABEÇOTE PARA A ESQUERDA. Encontra o final da palavra.  |
 |  | q88 ; [1 , a , b] ; ~ ; L ; q88 | MOVIMENTAR O CABEÇOTE PARA A ESQUERDA. Pula todos os 1, a e b |
