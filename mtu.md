@@ -31,7 +31,6 @@
 |  | q8 ; q ; q ; S ; q9 | Inicia a leitura do estado gravado na memoria |
 |  | q9 ; !@ ; ~ ; L ; q9 | LENDO A MEMORIA. Procura o começo da memoria.  |
 |  | q9 ; @ ; @ ; L ; q10 | LENDO A MEMORIA. |
-| D | q10 ; t ; T ; L ; q11 | LENDO A MEMORIA. Marca t como T para indicar que começou a ler a memoria.  |
 |  | q10 ; T ; T ; L ; q11 | LENDO A MEMORIA. Se encontrar T no lugar de t indica que a memoria já foi lida pelo menos uma vez. |
 |  | q11 ; 3 ; 3 ; L ; q11 | LENDO A MEMORIA. Passa por todos os 1s já lidos |
 |  | q11 ; 1 ; 3 ; R ; q12 | LENDO A MEMORIA. Marca um 1 como lido, deve ir até a transição e marcar um 1 no estado inicial dela |
@@ -93,12 +92,10 @@
 |  | q28 ; q ; q ; R ; q29 | LIMPANDO A FITA.  |
 |  | q29 ; !□ ; ~ ; R ; q29 | VERIFICAR QUAL A MARCAÇÃO. Ir ao final da entrada para escrever #R no final |
 | N | q29 ; □ ; □ ; L ; q66 | VERIFICAR QUAL A MARCAÇÃO. |
-| D | q29 ; □ ; # ; R ; q30 | MARCAR A PALAVRA COMO REJEITADA. Escrevendo o # ao final da entrada |
 | M | q30 ; □ ; R ; R ; **`q31`**  | MARCAR A PALAVRA COMO REJEITADA. Escrevendo R ao final da entrada e direcionando para o estado final da MTU. |
 |  | q32 ; !□ ; ~ ; R ; q32  | VERIFICADO SE O CABEÇOTE ESTÁ NO B. Ir pra o final da entrada para procurar a verificar a palavra da direita pela esquerda.   |
 |  | q32 ; □ ; □ ; L ; q33 | VERIFICADO SE O CABEÇOTE ESTÁ NO B. |
 |  | q33 ; [1, b, a] ; ~ ; L ; q33 | VERIFICADO SE O CABEÇOTE ESTÁ NO B. Ainda não encontrou o cabeçote. |
-| D | q33 ; $ ; $ ; L ; q35 | VERIFICADO SE O CABEÇOTE ESTÁ NO B. Indica que é compatível, já que o cabeçote esta no primeiro espaço após o $.  |
 |  | q33 ; B ; B ; L ; q45 | VERIFICADO SE O CABEÇOTE ESTÁ NO B. É compatível, já que o cabeçote está em um b. Deve retorna a transição e começar a escrita.  |
 |  | q33 ; [%, A] ; ~ ; L ; q34 | VERIFICADO SE O CABEÇOTE ESTÁ NO B. Indica que não é compatível, já que o cabeçote está no `s` ou `A`. Deve retorna a transição e marca-la como `F`.  |
 |  | q34 ; !B ; ~ ; L ; q34 | DESMARCAR SÍMBOLO DE LEITURA B DA TRANSIÇÃO. Procurando o B para desmarca-lo e marcar a transição como não compatível. |
@@ -112,35 +109,18 @@
 | N | q38 ; q ; Q ; R ; q39 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca o q para Q |
 | N | q39 ; [1, f] ; ~ ; S ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
 | N | q42 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
-| N | q42 ; 1 ; 5 ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA. Indica a leitura de um 1 no estado final |
+| N | q42 ; 1 ; 5 ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA. Indica a leitura de um 1 no estao final |
 | N | q42 ; [#, $, %] ; ~ ; L ; q108 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
 | N | q42 ; f ; f ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Encontrou f, indica que vai para o estado final |
 | N | q40 ; !□ ; ~ ; R ; q40 | COPIAR O ESTADO FINAL PARA A MEMORIA. Vai até o final da fita. |
 | N | q40 ; □ ; Y ; L ; q25 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca Y no final da fita para indicar que a máquina aceita a palavra |
 | N | q41 ; !T ; ~ ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
 | N | q41 ; T ; T ; L ; q43 | COPIAR O ESTADO FINAL PARA A MEMORIA |
+| N | q43 ; 1 ; 1 ; R ; q43 | COPIAR O ESTADO FINAL PARA A MEMORIA |
 | N | q43 ; 3 ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
 | N | q43 ; □ ; 1 ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
 | N | q107 ; !5 ; ~ ; R ; q107 | COPIAR O ESTADO FINAL PARA A MEMORIA |
 | N | q107 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA |
-| D | q35 ; !B ; ~ ; L ; q35 | ESCREVEDO O SÍMBOLO NO VAZIO. Procurando B para escrever o símbolo da transição no primeiro espaço após o $.  |
-| D | q35 ; B ; B ; R ; q36 |  |
-| D | q36 ; a ; A ; R ; q39 | ESCREVEDO O SÍMBOLO NO VAZIO. Achou a, indica que deve escrever o símbolo a seguidos de ao menos um 1 no vazio após a palavra.  |
-| D | q36 ; b ; B ; R ; q37 | ESCREVEDO O SÍMBOLO NO VAZIO. Achou b, indica que deve escrever o símbolo b no vazio após a palavra. |
-| D | q37 ; !□ ; ~ ; R ; q37 | ESCREVEDO O SÍMBOLO NO VAZIO. Procurando pelo espaço vazio após o $ para escrever B. |
-| D | q37 ; □ ; B ; L ; q54 | ESCREVEDO O SÍMBOLO NO VAZIO. Escrevendo B no primeiro espaço vazio após o $. Deve retorna a transição e verificar o movimento que deve fazer com o cabeçote.  |
-| D | **q38 ; 1 ; 1 ; S ; q39** | ESCREVENDO SÍMBOLO NO VAZIO. Verificando se existe ao menos um 1 depois do a.  |
-| D | q39 ; !□ ; ~ ; R ; q39 | ESCREVENDO SÍMBOLO NO VAZIO. Procurando o primeiro vazio depois da palavra para escrever o A na palavra |
-| D | q39 ; □ ; A ; L ; q40 | ESCREVENDO SÍMBOLO NO VAZIO. Escrevendo o A na palavra |
-| D | q40 ; !A ; ~ ; L ; q40 | ESCREVENDO SÍMBOLO NO VAZIO. Procurando o símbolo que deve ser escrito na palavra na transição. |
-| D | q40 ; A ; A ; R ; q41 |  |
-| D | q41 ; 2 ; 2 ; R ; q41 | ESCREVENDO SÍMBOLO NO VAZIO. Pula todos os 1s já escritos. |
-| D | q41 ; 1 ; 2 ; R ; q42 | ESCREVENDO SÍMBOLO NO VAZIO. Marca um 1 que vai ser escrito na palavra. |
-| D | q41 ; [R, L] ; ~ ; S ; q44 | ESCREVENDO SÍMBOLO NO VAZIO. Indica que terminou a escrita. Deve lidar com o movimento que o cabeçote deve realizar. Porém antes, deve desmarcar o 1s escritos na palavra. |
-| D | q42 ; !□ ; ~ ; R ; q42 | ESCREVENDO SÍMBOLO NO VAZIO. Procurando o primeiro espaço vazio para escrever o 1 na palavra.  |
-| D | q42 ; □ ; 4 ; L ; q43 | ESCREVENDO SÍMBOLO NO VAZIO. Escrevendo o 1 na palavra.  |
-| D | q43 ; !2 ; ~ ; L ; q43 | ESCREVENDO SÍMBOLO NO VAZIO. Procurando o 1 já escrito da transição |
-| D | q43 ; 2 ; 2 ; S ; q41 | ESCREVENDO SÍMBOLO NO VAZIO. Voltando para o loop de leitura e escrita.  |
 |  | q44 ; R ; r ; R ; q82 | MOVIMENTAR O CABEÇOTE PARA A DIREITA. O cabeçote deve ir para a direita.  |
 |  | q44 ; L ; l ; R ; q87 | MOVIMENTAR O CABEÇOTE PARA A ESQUERDA. O cabeçote deve ir para a esquerda.  |
 |  | q45 ; !B ; ~ ; L ; q45 | ESCREVENDO O SÍMBOLO X NO B. Procurando o símbolo que de ser escrito que deve ser escrita.   |
@@ -151,13 +131,19 @@
 |  | q47 ; B ; A ; L ; q48 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Substitui o B por A na palavra.  |
 |  | q48 ; !A ; ~ ; L ; q48 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Procura o símbolo que deve ser escrito da transição |
 | M | q48 ; A ; A ; R ; q50 | ESCREVENDO O SÍMBOLO A EM CIMA DO B.  |
-| D | q49 ; 1 ; 1 ; S ; q50 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Verifica se existe ao menos um 1 depois do a.  |
 |  | q50 ; 1 ; 2 ; R ; q51 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Lê o 1 do símbolo que deve ser escrito na palavra |
-|  | q50 ; [R, L] ; ~ ; S ; q44 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. A escrita foi concluída, agora deve desmarcar os 1s na palavra e depois realizar o movimento do cabeçote.  |
+|  | q50 ; [R, L] ; ~ ; R ; q49 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. A escrita foi concluída, agora deve voltar a palavra e verificar se exite algum 2 na palavra, se existir deve deslocar a palavra para a esquerda|
+|  | q49 ; !A ; ~ ; R ; q49 | COMFIRMANDO A ESCRITA. Procura o A na palavra. |
+|  | q49 ; A ; ~ ; R ; q159 | COMFIRMANDO A ESCRITA. Procura o A na palavra. |
+|  | q159 ; 4 ; 4 ; R ; q159 | COMFIRMANDO A ESCRITA. Procura o A na palavra. |
+|  | q159 ; 2 ; 2 ; S ; q92 | COMFIRMANDO A ESCRITA. Procura o A na palavra. |
+|  | q159 ; [a, b, □] ; 2 ; L ; q65 | COMFIRMANDO A ESCRITA. Procura o A na palavra. |
+|  | q65 ; !2 ; ~ ; L ; q65 | COMFIRMANDO A ESCRITA. Procura o A na palavra. |
+|  | q65 ; 2 ; ~ ; R ; q44 | COMFIRMANDO A ESCRITA. Procura o A na palavra. |
 |  | q51 ; !A ; ~ ; R ; q51 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Procura o A na palavra |
 |  | q51 ; A ; A ; R ; q52 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Encontrou A na palavra. Agora deve verificar o que tem do lado, se é necessário deslocar o resto da palavra para a direita. |
 |  | q52 ; 4 ; 4 ; R ; q52 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Passa por todos os 1s já escritos. |
-|  | q52 ; 2 ; 4 ; R ; q53 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. |
+|  | q52 ; 2 ; 4 ; L ; q53 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. |
 |  | q52 ; [a, b] ; ~ ; R ; q55 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. O resto da palavra deve ser deslocada para a direita para abrir espaço para a escrita.  |
 |  | q52 ; □ ; 4 ; L ; q53 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Encontrou vazio, ou seja, pode escrever e deve voltar para o loop de leitura e escrita do símbolo |
 |  | q53 ; !2 ; ~ ; L ; q53 | ESCREVENDO O SÍMBOLO A EM CIMA DO B. Voltar para a transição para terminar de ler a palavra que deve ser escrita. |
@@ -180,12 +166,9 @@
 |  | q62 ; □ ; □ ; L ; q63 | VERIFICA SE O CABEÇOTE ESTA NO S.  |
 | M | q63 ; [a, b, 1] ; ~ ; L ; q63 | VERIFICA SE O CABEÇOTE ESTA NO S. Pula toda a palavra até encontrar o símbolo % indicando que o cabeçote esta no inicio ou A ou B, indicando que não esta no inicio. |
 | N | q63 ; [A, B, $] ; ~ ; L ; q64 | VERIFICA SE O CABEÇOTE ESTA NO S. Encontrou `A` ou `B`, indica que o cabeçote não está no inicio, ou seja, a transição não é compatível, deve desmarcar e procurar a próxima.  |
-| D | q63 ; $ ; $ ; L ; q64 | VERIFICA SE O CABEÇOTE ESTA NO S. Encontrou $, indica que o cabeçote não está no inicio, ou seja, a transição não é compatível, deve desmarcar e procurar a próxima.  |
 | M | q63 ; % ; % ; L ; q35 | VERIFICA SE O CABEÇOTE ESTA NO S. Encontrou %, indica que o cabeçote está no inicio, ou seja, é compatível. Deve voltar de verificar se o símbolo de escrita também é um `s` . |
 |  | q64 ; !S ; ~ ; L ; q64 | DESMARCA O SÍMBOLO DE LEITURA S. Procurando o S da transição |
 |  | q64 ; S ; s ; L ; q18 | DESMARCA O SÍMBOLO DE LEITURA S. Desmarcando o S da transição |
-| D | q65 ; !S ; ~ ; L ; q65 | VERIFICANDO O DESLOCAMENTO DO CABEÇOTE |
-| D | q65 ; S ; S ; R ; q44 | VERIFICANDO O DESLOCAMENTO DO CABEÇOTE |
 | N | q66 ; Y ; # ; R ; q112 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #A no final da fita |
 | N | q66 ; N ; # ; R ; q30 | VERIFICAR QUAL A MARCAÇÃO. Indica que deve marcar #R no final da fita |
 |  | q67 ; !□ ; ~ ; R ; q67 | VERIFICANDO SE O CABEÇOTE ESTA NO A NA PALAVRA. Indo para o final da palavra.  |
@@ -197,7 +180,6 @@
 |  | q69 ; A ; a ; L ; q18 | MARCANDO A TRANISIÇÃO COMO NÃO COMPATÍVEL. Desmarcando o A da transição |
 |  | q70; !A ; ~ ; L ; q70 | VERIFICANDO SE O SÍMBOLO A É COMPATÍVEL. Procurando o símbolo da transição |
 | M | q70 ; A ; A ; R ; q72 |  |
-| D | q71 ; 1 ; 1 ; S ; q72 | VERIFICANDO SE O SÍMBOLO A É COMPATÍVEL. Verificando se existe ao menos um 1 depois do a. |
 |  | q72 ; 1 ; 2 ; R ; q73 | VERIFICANDO SE O SÍMBOLO A É COMPATÍVEL. Marcar 1 como lido na transição. Agora deve verificar se existi um 1 para ler na palavra |
 | C | q72 ; [a, b] ; ~ ; R ; q77 | VERIFICANDO SE O SÍMBOLO A É COMPATÍVEL. Encontrou R ou L, significa que terminou de ler o símbolo na transição, deve verificar se existe algum 1 não lido na palavra.  |
 |  | q73 ; !A ; ~ ; R ; q73 | VERIFICANDO SE O SÍMBOLO A É COMPATÍVEL. Ir até a palavra para ler um 1.  |
@@ -248,7 +230,7 @@
 | C | q89 ; 1 ; 1 ; L ; q89 | MOVIMENTAR O CABEÇOTE PARA A ESQUERDA. Pula todos os possíveis 1s.  |
 | N | q90 ; 1 ; 1 ; S ; q50 | ESCREVENDO A EM CIMA DO A. Confirma que existe ao menos um 1 depois do a.  |
 | C | q91 ; !A ; ~ ; R ; q91 | ESCREVENDO B EM CIMA DO A. Vai até a palavra. |
-| C | q91 ; A ; B ; R ; q92 | ESCREVENDO B EM CIMA DO A. Transforma A na palavra para B. Agora deve apagar todos os 1s que existem depois do A, ou seja, deve deslocar a palavra para a esquerda.  |
+| C | q91 ; A ; B ; R ; q92 | ESCREVENDO B EM CIMA DO A. Transforma A na palavra para B. Agora deve apagar todos os 1s que existem depois do A, ou seja, deve deslocar a palavra para a .  |
 | C | q92 ; 2 ; 2 ; R ; q92 | DESLOCAR A PALAVRA PARA A ESQUERDA. Pula todos os 1 que não serão sobrescrito |
 | C | q92 ; b ; 2 ; L ; q94 | DESLOCAR A PALAVRA PARA A ESQUERDA. Encontrando b, substitui por 2 e anda para a esquerda. Deve procurar o primeiro 2 da palavra e substituir por b.  |
 | C | q92 ; a ; 2 ; L ; q93 | DESLOCAR A PALAVRA PARA A ESQUERDA. Encontrando a, substitui por 2 e anda para a esquerda. Deve procurar o primeiro 2 da palavra e substituir por a.  |
@@ -282,7 +264,7 @@
 | N | q109 ; [a, 1, b, A, B] ; ~ ; L ; q109 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
 | N | q109 ; 4 ; 1 ; L ; q109 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
 | N | q109 ; [%, $] ; ~ ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
-| N | q110 ; [#, 1, q, R, L, f, b, s] ; ~ ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
+| N | q110 ; [#, 1, q, R, L, f, b, s, a] ; ~ ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
 | N | q110 ; 2 ; 1 ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
 | N | q110 ; F ; q ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
 | N | q110 ; 5 ; 1 ; L ; q110 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
@@ -322,15 +304,16 @@
 ## Entradas Testadas
 
 | Status | Entrada | Saída |
-| --- | --- | --- |
+| ---| --- | --- |
 | ✅ | q1ba11Rqf$a11 | q1ba11Rqf$A11#R |
 | ✅ | q1ssRqf$a11 | q1ssRqf$A11#R |
 | ✅ | q1a1a1Rqf$a1 | q1a1a1Rqf$a1B#A |
 | ✅ | q1a1a11Rqf$a1 | q1a1a11Rqf$a11B#A |
-| ✅  | q1a1a11Rqf$a1a1 | q1a1a11Rqf$a11A1#A |
-| ✅  | q1a1bRqf$a1 | q1a1a11Rqf$bB#A |
-| ✅  | q1a11bRqf$a11a11 | q1a1a11Rqf$bA11#A |
-| ➡️ | q1a1a11Rq11#q11a11a1Lqf$a1 | q1a1a11Rq11#q11a11a1Lqf$a1#A |
+| ✅ | q1a1a11Rqf$a1a1 | q1a1a11Rqf$a11A1#A |
+| ✅ | q1a1bRqf$a1 | q1a1a11Rqf$bB#A |
+| ✅ | q1a11bRqf$a11a11 | q1a1a11Rqf$bA11#A |
+| ✅ | q1a1a11Rq11#q11a11a1Lqf$a1 | q1a1a11Rq11#q11a11a1Lqf$a11B#R |
+| ✅ | q1a1a11Rq11#q11bbLq11#q11a11a1Rqf$a1 | q1a1a11Rq11#q11bbLq11#q11a11a1Rqf$a1B#A |
 | ➡️ | q1a1a1Rq11#q11ba1Lqf$a1 | q1a1a1Rq11#q11ba1Lqf$a1a1#A |
 | ➡️ | q1a1a1Rq1$a11 | q1a1a1Rq1$a11#R |
 | ➡️ | q1a1a1Lq11#q11a1a1Rqf$a1 | q1a1a1Lq11#q11a1a1Rqf$a1#R |
