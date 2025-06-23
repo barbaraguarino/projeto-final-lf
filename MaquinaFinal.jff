@@ -297,16 +297,16 @@
 			<y>1464.0</y>
 		</state>
 		<state id="74" name="q74">
-			<x>1566.0</x>
-			<y>1349.0</y>
+			<x>1648.0</x>
+			<y>1432.0</y>
 		</state>
 		<state id="75" name="q75">
 			<x>1505.0</x>
 			<y>1431.0</y>
 		</state>
 		<state id="76" name="q76">
-			<x>1496.0</x>
-			<y>1301.0</y>
+			<x>1532.0</x>
+			<y>1239.0</y>
 		</state>
 		<state id="77" name="q77">
 			<x>1414.0</x>
@@ -413,12 +413,12 @@
 			<y>1388.0</y>
 		</state>
 		<state id="104" name="q104">
-			<x>1688.0</x>
-			<y>1475.0</y>
+			<x>1751.0</x>
+			<y>1455.0</y>
 		</state>
 		<state id="105" name="q105">
-			<x>1753.0</x>
-			<y>1399.0</y>
+			<x>1750.0</x>
+			<y>1262.0</y>
 		</state>
 		<state id="106" name="q106">
 			<x>1537.0</x>
@@ -704,6 +704,27 @@
 			<read>5</read>
 			<write>5</write>
 			<move>R</move>
+		</transition>
+		<transition>
+			<from>76</from>
+			<to>104</to>
+			<read>a</read>
+			<write>a</write>
+			<move>L</move>
+		</transition>
+		<transition>
+			<from>76</from>
+			<to>104</to>
+			<read/>
+			<write/>
+			<move>L</move>
+		</transition>
+		<transition>
+			<from>76</from>
+			<to>104</to>
+			<read>b</read>
+			<write>b</write>
+			<move>L</move>
 		</transition>
 		<transition>
 			<from>72</from>
@@ -1833,25 +1854,11 @@
 			<move>R</move>
 		</transition>
 		<transition>
-			<from>74</from>
-			<to>104</to>
-			<read>a</read>
-			<write>~</write>
-			<move>L</move>
-		</transition>
-		<transition>
 			<from>73</from>
 			<to>76</to>
 			<read>A</read>
 			<write>A</write>
 			<move>R</move>
-		</transition>
-		<transition>
-			<from>74</from>
-			<to>104</to>
-			<read>b</read>
-			<write>~</write>
-			<move>L</move>
 		</transition>
 		<transition>
 			<from>20</from>
@@ -2447,13 +2454,6 @@
 			<read>B</read>
 			<write>B</write>
 			<move>R</move>
-		</transition>
-		<transition>
-			<from>74</from>
-			<to>104</to>
-			<read/>
-			<write>~</write>
-			<move>L</move>
 		</transition>
 		<transition>
 			<from>12</from>
