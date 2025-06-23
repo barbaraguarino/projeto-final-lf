@@ -1,17 +1,5 @@
 # Máquina de Turing v3.0
 
-## Anotações 
-
-- Deve analisa o que foi mudado na tabela e passar para o JFLAP.
-
-## O Fazer? 
-
-- [x]  Escrever A em cima de A
-- [x]  Escrever B em cima de A
-- [x]  Copiar o estado final para a memoria da máquina
-- [x]  Configurar para identificar o estado final da transição
-- [x]  Escrever aceitar palavra na fita
-
 ## Máquina de Turing 
 
 | ❗ | Transições | Observações |
@@ -279,17 +267,6 @@
 | | q111 ; 2 ; □ ; L ; q111 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
 | | q111 ; □ ; □ ; R ; q22 | LIMPAR A FITA PARA PROCURAR O PRÓXIMO ESTADO.  |
 | | q116 ; □ ; A ; L ; `q31` | MARCA ACEITAR PALAVRA.  |
-
-## Legenda
-
-| Legenda | Observação |
-| --- | --- |
-| M | Transição modificada |
-| N | Transição Nova |
-| D | Transição que deve ser apagada |
-| C | Verificar a transição no JFLAP |
-| A | Adicionar a tabela |
-| P | Onde parei de escrever |
 
 ## Observações
 
