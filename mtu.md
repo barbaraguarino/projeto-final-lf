@@ -260,8 +260,8 @@
 | N | q93 ; 2 ; 2 ; L ; q93 | DESLOCAR A PALAVRA PARA A ESQUERDA. Volta passando por todos os 2. |
 | N | q93 ; [b , 1, B, 4] ; ~ ; R ; q101 | DESLOCAR A PALAVRA PARA A ESQUERDA. Anda para a direita para encontrar o primeiro 2 da palavra. |
 | N | q101 ; 2 ; a ; R ; q92 | DESLOCAR A PALAVRA PARA A ESQUERDA. Substitui 2 por a e anda para direita e volta para o loop de deslocamento |
-| N | q99 ; 2 ; 2 ; L ; q102 | DESLOCAR A PALAVRA PARA A ESQUERDA. Volta passando por todos os 2. |
-| N | q102 ; [a, 1] ; ~ ; R ; q103 | DESLOCAR A PALAVRA PARA A ESQUERDA. Anda para a direita para encontrar o primeiro 2 da palavra. |
+| N | q99 ; 2 ; 2 ; L ; q99 | DESLOCAR A PALAVRA PARA A ESQUERDA. Volta passando por todos os 2. |
+| N | q99 ; [a, 1] ; ~ ; R ; q103 | DESLOCAR A PALAVRA PARA A ESQUERDA. Anda para a direita para encontrar o primeiro 2 da palavra. |
 | N | q103 ; 2 ; 1 ; R ; q92 | DESLOCAR A PALAVRA PARA A ESQUERDA. Substitui 2 por 1 e anda para direita e volta para o loop de deslocamento |
 | C | q95 ; 2 ; □ ; L ; q95 | DESLOCAR A PALAVRA PARA A ESQUERDA. Apaga todos os 2 encontrados na palavra.  |
 | M | q95 ; [4, b, B, 1] ; ~ ; L  ; q97 | DESLOCAR A PALAVRA PARA A ESQUERDA. Volta para a transição para descobrir o movimento do cabeçote.  |
@@ -329,7 +329,7 @@
 | ✅ | q1a1a11Rqf$a1 | q1a1a11Rqf$a11B#A |
 | ✅  | q1a1a11Rqf$a1a1 | q1a1a11Rqf$a11A1#A |
 | ✅  | q1a1bRqf$a1 | q1a1a11Rqf$bB#A |
-| ➡️  | q1a11bRqf$a11a11 | q1a1a11Rqf$bA11#A |
+| ✅  | q1a11bRqf$a11a11 | q1a1a11Rqf$bA11#A |
 | ➡️ | q1a1a11Rq11#q11a11a1Lqf$a1 | q1a1a11Rq11#q11a11a1Lqf$a1#A |
 | ➡️ | q1a1a1Rq11#q11ba1Lqf$a1 | q1a1a1Rq11#q11ba1Lqf$a1a1#A |
 | ➡️ | q1a1a1Rq1$a11 | q1a1a1Rq1$a11#R |

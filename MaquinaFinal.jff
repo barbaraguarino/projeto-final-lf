@@ -389,8 +389,8 @@
 			<y>679.0</y>
 		</state>
 		<state id="99" name="q99">
-			<x>578.0</x>
-			<y>1207.0</y>
+			<x>552.0</x>
+			<y>1225.0</y>
 		</state>
 		<state id="100" name="q100">
 			<x>598.0</x>
@@ -400,13 +400,9 @@
 			<x>803.0</x>
 			<y>1092.0</y>
 		</state>
-		<state id="102" name="q102">
-			<x>645.0</x>
-			<y>1324.0</y>
-		</state>
 		<state id="103" name="q103">
-			<x>735.0</x>
-			<y>1365.0</y>
+			<x>706.0</x>
+			<y>1388.0</y>
 		</state>
 		<state id="104" name="q104">
 			<x>1688.0</x>
@@ -597,13 +593,6 @@
 			<to>110</to>
 			<read>%</read>
 			<write>~</write>
-			<move>L</move>
-		</transition>
-		<transition>
-			<from>99</from>
-			<to>102</to>
-			<read>2</read>
-			<write>2</write>
 			<move>L</move>
 		</transition>
 		<transition>
@@ -926,6 +915,13 @@
 			<to>7</to>
 			<read/>
 			<write>T</write>
+			<move>L</move>
+		</transition>
+		<transition>
+			<from>99</from>
+			<to>99</to>
+			<read>2</read>
+			<write>2</write>
 			<move>L</move>
 		</transition>
 		<transition>
@@ -2238,13 +2234,6 @@
 			<move>R</move>
 		</transition>
 		<transition>
-			<from>102</from>
-			<to>103</to>
-			<read>1</read>
-			<write>~</write>
-			<move>R</move>
-		</transition>
-		<transition>
 			<from>111</from>
 			<to>22</to>
 			<read/>
@@ -2375,13 +2364,6 @@
 			<to>13</to>
 			<read>@</read>
 			<write>@</write>
-			<move>R</move>
-		</transition>
-		<transition>
-			<from>102</from>
-			<to>103</to>
-			<read>a</read>
-			<write>~</write>
 			<move>R</move>
 		</transition>
 		<transition>
@@ -2529,6 +2511,20 @@
 			<to>52</to>
 			<read>A</read>
 			<write>A</write>
+			<move>R</move>
+		</transition>
+		<transition>
+			<from>99</from>
+			<to>103</to>
+			<read>1</read>
+			<write>1</write>
+			<move>R</move>
+		</transition>
+		<transition>
+			<from>99</from>
+			<to>103</to>
+			<read>a</read>
+			<write>a</write>
 			<move>R</move>
 		</transition>
 		<transition>
