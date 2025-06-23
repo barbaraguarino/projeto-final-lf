@@ -4,7 +4,7 @@
 
 - Deve analisa o que foi mudado na tabela e passar para o JFLAP.
 
-## O Fazer?
+## O Fazer? 
 
 - [x]  Escrever A em cima de A
 - [x]  Escrever B em cima de A
