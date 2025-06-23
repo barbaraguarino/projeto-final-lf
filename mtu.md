@@ -110,7 +110,7 @@
 | N | q37 ; b ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. O cabeçote foi para o inicio da fita. Agora deve voltar a transição e copiar o estado final para a memoria da máquina |
 | N | q37 ; □ ; B ; L ; q86 | MOVIMENTO DO CABEÇOTE PARA A DIREITA. Encontrou vazio, deve voltar para a transição e gravar na memoria da máquina o estado final |
 | N | q38 ; q ; Q ; R ; q39 | COPIAR O ESTADO FINAL PARA A MEMORIA. Marca o q para Q |
-| N | q39 ; 1 ; 1 ; S ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
+| N | q39 ; [1, f] ; ~ ; S ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
 | N | q42 ; 5 ; 5 ; R ; q42 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
 | N | q42 ; 1 ; 5 ; L ; q41 | COPIAR O ESTADO FINAL PARA A MEMORIA. Indica a leitura de um 1 no estado final |
 | N | q42 ; [#, $, %] ; ~ ; L ; q108 | COPIAR O ESTADO FINAL PARA A MEMORIA.  |
