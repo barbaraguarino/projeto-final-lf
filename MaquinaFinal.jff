@@ -1328,6 +1328,13 @@
 			<move>L</move>
 		</transition>
 		<transition>
+			<from>26</from>
+			<to>26</to>
+			<read>B</read>
+			<write>b</write>
+			<move>L</move>
+		</transition>
+		<transition>
 			<from>110</from>
 			<to>110</to>
 			<read>r</read>
