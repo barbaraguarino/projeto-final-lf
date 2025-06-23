@@ -314,8 +314,8 @@
 | ✅ | q1a11bRqf$a11a11 | q1a1a11Rqf$bA11#A |
 | ✅ | q1a1a11Rq11#q11a11a1Lqf$a1 | q1a1a11Rq11#q11a11a1Lqf$a11B#R |
 | ✅ | q1a1a11Rq11#q11bbLq11#q11a11a1Rqf$a1 | q1a1a11Rq11#q11bbLq11#q11a11a1Rqf$a1B#A |
-| ➡️ | q1a1a1Rq11#q11ba1Lqf$a1 | q1a1a1Rq11#q11ba1Lqf$a1a1#A |
-| ➡️ | q1a1a1Rq1$a11 | q1a1a1Rq1$a11#R |
+| ✅ | q1a1a1Rq11#q11ba1Lqf$a1 | q1a1a1Rq11#q11ba1Lqf$A1a1#A |
+| ✅ | q1a1a1Rq1$a11 | q1a1a1Rq1$a11#R |
 | ➡️ | q1a1a1Lq11#q11a1a1Rqf$a1 | q1a1a1Lq11#q11a1a1Rqf$a1#R |
 | ➡️ | q1a11a1Rq11#q1a111a1Rq11#q1a1a11Rqf$a1 | q1a11a1Rq11#q1a111a1Rq11#q1a1a11Rqf$a11#A |
 | ➡️ | q1a1a1Rq1$a1 | A máquina não para |
