@@ -318,6 +318,6 @@
 | ✅ | q1a1a1Rq1$a11 | q1a1a1Rq1$a11#R |
 | ✅ | q1a1a1Lq11#q11a1a1Rqf$a1 | q1a1a1Lq11#q11a1a1Rqf$a1#R |
 | ✅ | q1a11a1Rq11#q1a111a1Rq11#q1a1a11Rqf$a1 | q1a11a1Rq11#q1a111a1Rq11#q1a1a11Rqf$a11B#A |
-| ➡️ | q1a1a1Rq1$a1 | A máquina não para |
-| ➡️ | q1a1a1Xq1$a1 | A fita trava |
-| ➡️ | q1a1a1Lq11#q11ssRqf$a1 | q1a1a1Lq11#q11ssRqf$a1#A |
+| ✅ | q1a1a1Rq1#q1bbLq1$a1 | A máquina não para |
+| ✅ | q1a1a1Xq1$a1 | A fita trava |
+| ✅ | q1a1a1Lq11#q11ssRqf$a1 | q1a1a1Lq11#q11ssRqf$A1#A |
