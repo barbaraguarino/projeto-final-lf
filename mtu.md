@@ -326,7 +326,10 @@
 | ✅ | q1ba11Rqf$a11 | q1ba11Rqf$A11#R |
 | ✅ | q1ssRqf$a11 | q1ssRqf$A11#R |
 | ✅ | q1a1a1Rqf$a1 | q1a1a1Rqf$a1B#A |
-| ➡️ | q1a1a11Rqf$a1 | q1a1a11Rqf$a11#A |
+| ✅ | q1a1a11Rqf$a1 | q1a1a11Rqf$a11B#A |
+| ✅  | q1a1a11Rqf$a1a1 | q1a1a11Rqf$a11A1#A |
+| ➡️  | q1a1bRqf$a1 | q1a1a11Rqf$bB#A |
+| ➡️  | q1a11bRqf$a11a11 | q1a1a11Rqf$bA11#A |
 | ➡️ | q1a1a11Rq11#q11a11a1Lqf$a1 | q1a1a11Rq11#q11a11a1Lqf$a1#A |
 | ➡️ | q1a1a1Rq11#q11ba1Lqf$a1 | q1a1a1Rq11#q11ba1Lqf$a1a1#A |
 | ➡️ | q1a1a1Rq1$a11 | q1a1a1Rq1$a11#R |
