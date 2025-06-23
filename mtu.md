@@ -1,6 +1,6 @@
 # Máquina de Turing v3.0
 
-## Anotações
+## Anotações 
 
 - Deve analisa o que foi mudado na tabela e passar para o JFLAP.
 
@@ -12,7 +12,7 @@
 - [x]  Configurar para identificar o estado final da transição
 - [x]  Escrever aceitar palavra na fita
 
-## Máquina de Turing
+## Máquina de Turing 
 
 | ❗ | Transições | Observações |
 | --- | --- | --- |
