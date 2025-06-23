@@ -1,6 +1,4 @@
-# Máquina de Turing v3.0
-
-## Máquina de Turing 
+# Máquina de Turing 
 
 | ❗ | Transições | Observações |
 | --- | --- | --- |
