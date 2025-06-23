@@ -51,7 +51,8 @@ A MTU simula a execução de `M` sobre a palavra `w`. A simulação para sob dua
 
 Conforme os entregáveis solicitados:
 
-* `/`: Contém os arquivos `.jff` com as versões das implementações da Máquina de Turing Universal.
+* `/`: Contém o arquivo `.jff` com a Máquina de Turing Universal.
 * `/`: Contém o arquivo `mtu.md` onde contém a Máquina de Turing Universal na forma de tabela e as entradas para teste.
+* `/`: Contém o arquivo `.txt` com os casos de uso.
 * `/README.md`: Esta documentação.
 
