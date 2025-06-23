@@ -322,3 +322,7 @@
 | ✅ | q1a1a1Rq1#q1bbLq1$a1 | A máquina não para |
 | ✅ | q1a1a1Xq1$a1 | A fita trava |
 | ✅ | q1a1a1Lq11#q11ssRqf$a1 | q1a1a1Lq11#q11ssRqf$A1#A |
+| ✅ | q1a1a1Lq11#q11ssLqf$a1 | q1a1a1Lq11#q11ssRqf$A1#R |
+| ✅ | q1a1a11Rq11#q11a11a111Lqf#q11a1a11Rq1$a1a11 | q1a1a11Rq11#q11a11a111Lqf#q11a1a11Rq1$A11a111#A |
+| ✅ | q1a1a11Rq11#q11a11a111Lq111#q111ssRq1111#q1111a11a1111Rqf#q11a1a11Rq1#q111a11a1Lq111$a1a11 | q1a1a11Rq11#q11a11a111Lq111#q111ssRq1111#q1111a11a1111Rqf#q11a1a11Rq1#q111a11a1Lq111$A1a111#R |
+| ✅ | q1a1a11Rq11#q11a11a111Lq111#q111ssRq1111#q1111a1a1111Rqf#q11a1a11Rq1#q111a11a1Lq111$a1a11 | q1a1a11Rq11#q11a11a111Lq111#q111ssRq1111#q1111a1a1111Rqf#q11a1a11Rq1#q111a11a1Lq111$a1111A111#A |
