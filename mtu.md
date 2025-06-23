@@ -18,7 +18,7 @@
 | --- | --- | --- |
 |  | q0 ; q ; q ; R ; q1 | Verifica se a entrada começa com `q1`  |
 |  | q1 ; 1 ; 1 ; R ; q2 | Verifica se a entrada começa com `q1`  |
-|  | q2 ; [a, b] ; ~ ; R ; q3 | Verifica se a entrada começa com `q1`  |
+|  | q2 ; [a, b, s] ; ~ ; R ; q3 | Verifica se a entrada começa com `q1`  |
 |  | q3 ; !$ ; ~ ; R ; q3 | MARCAÇÃO DO CABEÇOTE. Procura `$` para marcar o cabeçote na palavra. |
 |  | q3 ; $ ; $ ; R ; q4 | MARCAÇÃO DO CABEÇOTE.  |
 |  | q4 ; a ; A ; L ; q5 | MARCAÇÃO DO CABEÇOTE. Marca o cabeçote no primeiro símbolo da palavra se ele existir |
@@ -323,8 +323,8 @@
 
 | Status | Entrada | Saída |
 | --- | --- | --- |
-| ✅ | q1ba11Rqf$a11 | q1ba11Rqf$a11#R |
-| ✅ | q1ssRqf$a11 | Invalido |
+| ✅ | q1ba11Rqf$a11 | q1ba11Rqf$A11#R |
+| ✅ | q1ssRqf$a11 | q1ssRqf$A11#R |
 | ➡️ | q1a1a1Rqf$a1 | q1a1a1Rqf$a1#A |
 | ➡️ | q1a1a11Rqf$a1 | q1a1a11Rqf$a11#A |
 | ➡️ | q1a1a11Rq11#q11a11a1Lqf$a1 | q1a1a11Rq11#q11a11a1Lqf$a1#A |
